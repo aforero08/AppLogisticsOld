@@ -1,0 +1,39 @@
+﻿@model AppLogistics.Models.EPS
+
+@{
+    ViewBag.Title = "Borrar";
+}
+
+<h2>Borrar @Model.GetType().Name</h2>
+
+<h3>Está seguro de querer eliminar este elemento?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NIT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NIT)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-info"})
+        </div>
+    }
+</div>
