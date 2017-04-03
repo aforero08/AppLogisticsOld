@@ -333,6 +333,12 @@
       <DependentUpon>201703290440183_asd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppLogisticsModel\AppLogisticsModel.csproj">
+      <Project>{5c5ea433-43e9-4a6d-865f-a01d0110aba3}</Project>
+      <Name>AppLogisticsModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

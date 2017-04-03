@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLogistics", "AppLogistic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLogistics.Tests", "AppLogistics.Tests\AppLogistics.Tests.csproj", "{0F03A8A9-372B-4B04-9AC7-6F0CAE1ABC2F}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AppLogisticsDB", "AppLogisticsDB\AppLogisticsDB.sqlproj", "{D574E36D-1666-4300-B0AE-6F30C8837CAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppLogisticsModel", "AppLogisticsModel\AppLogisticsModel.csproj", "{5C5EA433-43E9-4A6D-865F-A01D0110ABA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,16 @@ Global
 		{0F03A8A9-372B-4B04-9AC7-6F0CAE1ABC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F03A8A9-372B-4B04-9AC7-6F0CAE1ABC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F03A8A9-372B-4B04-9AC7-6F0CAE1ABC2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D574E36D-1666-4300-B0AE-6F30C8837CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D574E36D-1666-4300-B0AE-6F30C8837CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D574E36D-1666-4300-B0AE-6F30C8837CAD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D574E36D-1666-4300-B0AE-6F30C8837CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D574E36D-1666-4300-B0AE-6F30C8837CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D574E36D-1666-4300-B0AE-6F30C8837CAD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5C5EA433-43E9-4A6D-865F-A01D0110ABA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C5EA433-43E9-4A6D-865F-A01D0110ABA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C5EA433-43E9-4A6D-865F-A01D0110ABA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C5EA433-43E9-4A6D-865F-A01D0110ABA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d38c34b015794f0ba2fbafe482960f68" Name="Diagram1">
+        <EntityTypeShape EntityType="AppLogisticsDBModel.AFP" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.BranchOffice" Width="1.5" PointX="10.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.EPS" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.MaritalStatus" Width="1.5" PointX="5.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.Activity" Width="1.5" PointX="6" PointY="4.125" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.Carrier" Width="1.5" PointX="11.5" PointY="4.125" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.Client" Width="1.5" PointX="6" PointY="6.875" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.ClientArea" Width="1.5" PointX="7.875" PointY="8.5" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.Employee" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.Product" Width="1.5" PointX="12.375" PointY="7" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.Rate" Width="1.5" PointX="4" PointY="7.25" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.Service" Width="1.5" PointX="10" PointY="6.875" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.VehicleType" Width="1.5" PointX="6" PointY="10.75" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Rate_Activity" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Service_Activity" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Employee_AFP" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Service_Carrier" ></AssociationConnector>
+        <AssociationConnector Association="AppLogisticsDBModel.FK_ClientArea_Client" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Rate_Client" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Service_Client" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Service_ClientArea" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Employee_EPS" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Employee_MaritalStatus" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Service_Product" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Rate_VehicleType" />
+        <AssociationConnector Association="AppLogisticsDBModel.FK_Service_VehicleType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

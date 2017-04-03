@@ -1,34 +1,34 @@
-﻿/*
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AppLogistics.Models
+namespace AppLogisticsModel
 {
-    public class EPS
+
+    [MetadataType(typeof(AfpMetadata))]
+    public partial class AFP
     {
+    }
 
-        public int Id { get; set; }
-
+    public class AfpMetadata
+    {
         /// <summary>
-        /// Nombre de la EPS
+        /// Nombre de la AFP
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es obligatorio")]
         [StringLength(128, MinimumLength = 3)]
         [Display(Name = "Nombre")]
-        public string Name { get; set; }
+        public string Name;
 
         /// <summary>
-        /// NIT de la EPS
+        /// NIT de la AFP
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es obligatorio")]
         [Display(Name = "NIT")]
-        [MinLength(9, ErrorMessage ="La longitud mínima es 9")]
-        public long NIT { get; set; }
-
+        [MinLength(9, ErrorMessage = "La longitud mínima es 9")]
+        public long NIT;
     }
 }
-
-*/

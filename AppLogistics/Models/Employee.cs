@@ -24,7 +24,7 @@ namespace AppLogistics.Models
         public MaritalStatus MaritalStatus { get; set; }
         public string EmergencyContact { get; set; }
         public string EmergencyContactPhone { get; set; }
-        public EPS Eps { get; set; }
+        //public EPS Eps { get; set; }
         public AFP Afp { get; set; }
         public BranchOffice BranchOffice { get; set; }
         public DbSet<EmployeeDocuments> Documents { get; set; }

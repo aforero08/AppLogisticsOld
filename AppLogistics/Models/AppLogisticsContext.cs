@@ -19,7 +19,6 @@ namespace AppLogistics.Models
         {
         }
 
-        public System.Data.Entity.DbSet<AppLogistics.Models.EPS> EPS { get; set; }
 
         public System.Data.Entity.DbSet<AppLogistics.Models.AFP> AFPs { get; set; }
 

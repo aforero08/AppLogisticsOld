@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AppLogistics.Models;
+using System.ComponentModel.DataAnnotations;
+using AppLogisticsModel;
 
 namespace AppLogistics.Controllers
 {
+    [Authorize]
     public class EPSController : Controller
     {
-        private AppLogisticsContext db = new AppLogisticsContext();
+        private AppLogisticsModel.AppLogisticsDBEntities db = new AppLogisticsDBEntities();
 
         // GET: EPS
         public async Task<ActionResult> Index()
