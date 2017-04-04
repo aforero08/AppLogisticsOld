@@ -14,6 +14,12 @@ namespace AppLogisticsModel
     
     public partial class Service
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Service()
+        {
+            this.Holding = new HashSet<Holding>();
+        }
+    
         public int Id { get; set; }
         public System.DateTime ExecutionDate { get; set; }
         public int ClientId { get; set; }
@@ -26,6 +32,9 @@ namespace AppLogisticsModel
         public Nullable<int> CarrierId { get; set; }
         public string ExternalId { get; set; }
         public string Comments { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public int FullPrice { get; set; }
+        public int HoldingPrice { get; set; }
     
         public virtual Activity Activity { get; set; }
         public virtual Carrier Carrier { get; set; }
@@ -33,5 +42,7 @@ namespace AppLogisticsModel
         public virtual ClientArea ClientArea { get; set; }
         public virtual Product Product { get; set; }
         public virtual VehicleType VehicleType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Holding> Holding { get; set; }
     }
 }

@@ -43,7 +43,7 @@
           <Property Name="NIT" Type="bigint" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="BrachOfficeId" Type="int" Nullable="false" />
+          <Property Name="BranchOfficeId" Type="int" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Contact" Type="varchar" MaxLength="128" />
         </EntityType>
@@ -79,6 +79,25 @@
           <Property Name="BranchOfficeId" Type="int" Nullable="false" />
           <Property Name="Comments" Type="varchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="EmployeeDocuments">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="CV" Type="bit" Nullable="false" />
+          <Property Name="DocumentCopy" Type="bit" Nullable="false" />
+          <Property Name="Photos" Type="bit" Nullable="false" />
+          <Property Name="MilitaryIdCopy" Type="bit" Nullable="false" />
+          <Property Name="LaborCertification" Type="bit" Nullable="false" />
+          <Property Name="PersonalReference" Type="bit" Nullable="false" />
+          <Property Name="DisciplinaryBackground" Type="bit" Nullable="false" />
+          <Property Name="KnowledgeTest" Type="bit" Nullable="false" />
+          <Property Name="AdmissionTest" Type="bit" Nullable="false" />
+          <Property Name="Contract" Type="bit" Nullable="false" />
+          <Property Name="InternalRegulations" Type="bit" Nullable="false" />
+          <Property Name="EndownmentLetter" Type="bit" Nullable="false" />
+          <Property Name="CriticalPosition" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="EPS">
           <Key>
             <PropertyRef Name="Id" />
@@ -86,6 +105,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="NIT" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Holding">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Fare" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="MaritalStatus">
           <Key>
@@ -117,7 +145,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ExecutionDate" Type="datetime" Nullable="false" />
+          <Property Name="ExecutionDate" Type="date" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
           <Property Name="ClientAreaId" Type="int" />
           <Property Name="ActivityId" Type="int" Nullable="false" />
@@ -127,6 +156,8 @@
           <Property Name="VehicleNumber" Type="varchar" MaxLength="50" />
           <Property Name="CarrierId" Type="int" />
           <Property Name="ExternalId" Type="varchar" MaxLength="128" />
+          <Property Name="FullPrice" Type="int" Nullable="false" />
+          <Property Name="HoldingPrice" Type="int" Nullable="false" />
           <Property Name="Comments" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="VehicleType">
@@ -136,6 +167,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Client_BranchOffice">
+          <End Role="BranchOffice" Type="Self.BranchOffice" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchOffice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="BranchOfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClientArea_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="1" />
           <End Role="ClientArea" Type="Self.ClientArea" Multiplicity="*" />
@@ -181,6 +224,44 @@
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="MaritalStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeDocuments_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmployeeDocuments" Type="Self.EmployeeDocuments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeDocuments">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Holding_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Holding" Type="Self.Holding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Holding">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Holding_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Holding" Type="Self.Holding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Holding">
+              <PropertyRef Name="ServiceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -300,12 +381,18 @@
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientArea" EntityType="Self.ClientArea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeDocuments" EntityType="Self.EmployeeDocuments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EPS" EntityType="Self.EPS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Holding" EntityType="Self.Holding" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaritalStatus" EntityType="Self.MaritalStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Client_BranchOffice" Association="Self.FK_Client_BranchOffice">
+            <End Role="BranchOffice" EntitySet="BranchOffice" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClientArea_Client" Association="Self.FK_ClientArea_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="ClientArea" EntitySet="ClientArea" />
@@ -321,6 +408,18 @@
           <AssociationSet Name="FK_Employee_MaritalStatus" Association="Self.FK_Employee_MaritalStatus">
             <End Role="MaritalStatus" EntitySet="MaritalStatus" />
             <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeDocuments_Employee" Association="Self.FK_EmployeeDocuments_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeDocuments" EntitySet="EmployeeDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Holding_Employee" Association="Self.FK_Holding_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Holding" EntitySet="Holding" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Holding_Service" Association="Self.FK_Holding_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Holding" EntitySet="Holding" />
           </AssociationSet>
           <AssociationSet Name="FK_Rate_Activity" Association="Self.FK_Rate_Activity">
             <End Role="Activity" EntitySet="Activity" />
@@ -378,6 +477,7 @@
           </Key>
           <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Client" Relationship="AppLogisticsDBModel.FK_Client_BranchOffice" FromRole="BranchOffice" ToRole="Client" />
         </EntityType>
         <EntityType Name="EPS">
           <Key>
@@ -462,6 +562,24 @@
             <End Role="VehicleType" EntitySet="VehicleType" />
             <End Role="Service" EntitySet="Service" />
           </AssociationSet>
+          <AssociationSet Name="FK_Client_BranchOffice" Association="AppLogisticsDBModel.FK_Client_BranchOffice">
+            <End Role="BranchOffice" EntitySet="BranchOffice" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <EntitySet Name="Holding" EntityType="AppLogisticsDBModel.Holding" />
+          <AssociationSet Name="FK_Holding_Employee" Association="AppLogisticsDBModel.FK_Holding_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Holding" EntitySet="Holding" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Holding_Service" Association="AppLogisticsDBModel.FK_Holding_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Holding" EntitySet="Holding" />
+          </AssociationSet>
+          <EntitySet Name="EmployeeDocuments" EntityType="AppLogisticsDBModel.EmployeeDocuments" />
+          <AssociationSet Name="FK_EmployeeDocuments_Employee" Association="AppLogisticsDBModel.FK_EmployeeDocuments_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeDocuments" EntitySet="EmployeeDocuments" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Activity">
           <Key>
@@ -489,12 +607,13 @@
           <Property Name="NIT" Type="Int64" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="BrachOfficeId" Type="Int32" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Contact" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ClientArea" Relationship="AppLogisticsDBModel.FK_ClientArea_Client" FromRole="Client" ToRole="ClientArea" />
           <NavigationProperty Name="Rate" Relationship="AppLogisticsDBModel.FK_Rate_Client" FromRole="Client" ToRole="Rate" />
           <NavigationProperty Name="Service" Relationship="AppLogisticsDBModel.FK_Service_Client" FromRole="Client" ToRole="Service" />
+          <Property Name="BranchOfficeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BranchOffice" Relationship="AppLogisticsDBModel.FK_Client_BranchOffice" FromRole="Client" ToRole="BranchOffice" />
         </EntityType>
         <EntityType Name="ClientArea">
           <Key>
@@ -532,6 +651,8 @@
           <NavigationProperty Name="AFP" Relationship="AppLogisticsDBModel.FK_Employee_AFP" FromRole="Employee" ToRole="AFP" />
           <NavigationProperty Name="EPS" Relationship="AppLogisticsDBModel.FK_Employee_EPS" FromRole="Employee" ToRole="EPS" />
           <NavigationProperty Name="MaritalStatus" Relationship="AppLogisticsDBModel.FK_Employee_MaritalStatus" FromRole="Employee" ToRole="MaritalStatus" />
+          <NavigationProperty Name="Holding" Relationship="AppLogisticsDBModel.FK_Holding_Employee" FromRole="Employee" ToRole="Holding" />
+          <NavigationProperty Name="EmployeeDocuments" Relationship="AppLogisticsDBModel.FK_EmployeeDocuments_Employee" FromRole="Employee" ToRole="EmployeeDocuments" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -560,7 +681,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ExecutionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExecutionDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ClientId" Type="Int32" Nullable="false" />
           <Property Name="ClientAreaId" Type="Int32" />
           <Property Name="ActivityId" Type="Int32" Nullable="false" />
@@ -577,6 +698,10 @@
           <NavigationProperty Name="ClientArea" Relationship="AppLogisticsDBModel.FK_Service_ClientArea" FromRole="Service" ToRole="ClientArea" />
           <NavigationProperty Name="Product" Relationship="AppLogisticsDBModel.FK_Service_Product" FromRole="Service" ToRole="Product" />
           <NavigationProperty Name="VehicleType" Relationship="AppLogisticsDBModel.FK_Service_VehicleType" FromRole="Service" ToRole="VehicleType" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FullPrice" Type="Int32" Nullable="false" />
+          <Property Name="HoldingPrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Holding" Relationship="AppLogisticsDBModel.FK_Holding_Service" FromRole="Service" ToRole="Holding" />
         </EntityType>
         <EntityType Name="VehicleType">
           <Key>
@@ -743,6 +868,87 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Client_BranchOffice">
+          <End Type="AppLogisticsDBModel.BranchOffice" Role="BranchOffice" Multiplicity="1" />
+          <End Type="AppLogisticsDBModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchOffice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="BranchOfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Holding">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Fare" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="AppLogisticsDBModel.FK_Holding_Employee" FromRole="Holding" ToRole="Employee" />
+          <NavigationProperty Name="Service" Relationship="AppLogisticsDBModel.FK_Holding_Service" FromRole="Holding" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Holding_Employee">
+          <End Type="AppLogisticsDBModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="AppLogisticsDBModel.Holding" Role="Holding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Holding">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Holding_Service">
+          <End Type="AppLogisticsDBModel.Service" Role="Service" Multiplicity="1" />
+          <End Type="AppLogisticsDBModel.Holding" Role="Holding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Holding">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EmployeeDocuments">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="CV" Type="Boolean" Nullable="false" />
+          <Property Name="DocumentCopy" Type="Boolean" Nullable="false" />
+          <Property Name="Photos" Type="Boolean" Nullable="false" />
+          <Property Name="MilitaryIdCopy" Type="Boolean" Nullable="false" />
+          <Property Name="LaborCertification" Type="Boolean" Nullable="false" />
+          <Property Name="PersonalReference" Type="Boolean" Nullable="false" />
+          <Property Name="DisciplinaryBackground" Type="Boolean" Nullable="false" />
+          <Property Name="KnowledgeTest" Type="Boolean" Nullable="false" />
+          <Property Name="AdmissionTest" Type="Boolean" Nullable="false" />
+          <Property Name="Contract" Type="Boolean" Nullable="false" />
+          <Property Name="InternalRegulations" Type="Boolean" Nullable="false" />
+          <Property Name="EndownmentLetter" Type="Boolean" Nullable="false" />
+          <Property Name="CriticalPosition" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="AppLogisticsDBModel.FK_EmployeeDocuments_Employee" FromRole="EmployeeDocuments" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_EmployeeDocuments_Employee">
+          <End Type="AppLogisticsDBModel.Employee" Role="Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AppLogisticsDBModel.EmployeeDocuments" Role="EmployeeDocuments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeDocuments">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -803,9 +1009,9 @@
           <EntitySetMapping Name="Client">
             <EntityTypeMapping TypeName="AppLogisticsDBModel.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="BranchOfficeId" ColumnName="BranchOfficeId" />
                 <ScalarProperty Name="Contact" ColumnName="Contact" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="BrachOfficeId" ColumnName="BrachOfficeId" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="NIT" ColumnName="NIT" />
@@ -870,6 +1076,9 @@
           <EntitySetMapping Name="Service">
             <EntityTypeMapping TypeName="AppLogisticsDBModel.Service">
               <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="HoldingPrice" ColumnName="HoldingPrice" />
+                <ScalarProperty Name="FullPrice" ColumnName="FullPrice" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="ExternalId" ColumnName="ExternalId" />
                 <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
@@ -890,6 +1099,36 @@
               <MappingFragment StoreEntitySet="VehicleType">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Holding">
+            <EntityTypeMapping TypeName="AppLogisticsDBModel.Holding">
+              <MappingFragment StoreEntitySet="Holding">
+                <ScalarProperty Name="Fare" ColumnName="Fare" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeDocuments">
+            <EntityTypeMapping TypeName="AppLogisticsDBModel.EmployeeDocuments">
+              <MappingFragment StoreEntitySet="EmployeeDocuments">
+                <ScalarProperty Name="CriticalPosition" ColumnName="CriticalPosition" />
+                <ScalarProperty Name="EndownmentLetter" ColumnName="EndownmentLetter" />
+                <ScalarProperty Name="InternalRegulations" ColumnName="InternalRegulations" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="AdmissionTest" ColumnName="AdmissionTest" />
+                <ScalarProperty Name="KnowledgeTest" ColumnName="KnowledgeTest" />
+                <ScalarProperty Name="DisciplinaryBackground" ColumnName="DisciplinaryBackground" />
+                <ScalarProperty Name="PersonalReference" ColumnName="PersonalReference" />
+                <ScalarProperty Name="LaborCertification" ColumnName="LaborCertification" />
+                <ScalarProperty Name="MilitaryIdCopy" ColumnName="MilitaryIdCopy" />
+                <ScalarProperty Name="Photos" ColumnName="Photos" />
+                <ScalarProperty Name="DocumentCopy" ColumnName="DocumentCopy" />
+                <ScalarProperty Name="CV" ColumnName="CV" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

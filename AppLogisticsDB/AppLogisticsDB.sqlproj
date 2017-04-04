@@ -79,5 +79,7 @@
     <Build Include="Tables\Client.sql" />
     <Build Include="Tables\Carrier.sql" />
     <Build Include="Tables\Activity.sql" />
+    <Build Include="Tables\Holding.sql" />
+    <Build Include="Tables\EmployeeDocuments.sql" />
   </ItemGroup>
 </Project>

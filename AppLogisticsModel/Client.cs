@@ -26,9 +26,9 @@ namespace AppLogisticsModel
         public long NIT { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public int BrachOfficeId { get; set; }
         public string Phone { get; set; }
         public string Contact { get; set; }
+        public int BranchOfficeId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientArea> ClientArea { get; set; }
@@ -36,5 +36,6 @@ namespace AppLogisticsModel
         public virtual ICollection<Rate> Rate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Service> Service { get; set; }
+        public virtual BranchOffice BranchOffice { get; set; }
     }
 }

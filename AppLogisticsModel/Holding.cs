@@ -12,18 +12,14 @@ namespace AppLogisticsModel
     using System;
     using System.Collections.Generic;
     
-    public partial class BranchOffice
+    public partial class Holding
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BranchOffice()
-        {
-            this.Client = new HashSet<Client>();
-        }
-    
-        public string Name { get; set; }
         public int Id { get; set; }
+        public int ServiceId { get; set; }
+        public int EmployeeId { get; set; }
+        public int Fare { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Client> Client { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Service Service { get; set; }
     }
 }

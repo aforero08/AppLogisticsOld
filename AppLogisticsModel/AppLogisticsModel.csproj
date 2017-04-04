@@ -85,7 +85,13 @@
     <Compile Include="Employee.cs">
       <DependentUpon>AppLogisticsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeDocuments.cs">
+      <DependentUpon>AppLogisticsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EPS.cs">
+      <DependentUpon>AppLogisticsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Holding.cs">
       <DependentUpon>AppLogisticsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MaritalStatus.cs">

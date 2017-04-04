@@ -14,6 +14,12 @@ namespace AppLogisticsModel
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.Holding = new HashSet<Holding>();
+        }
+    
         public int Id { get; set; }
         public long DocumentNumber { get; set; }
         public string Name { get; set; }
@@ -37,5 +43,8 @@ namespace AppLogisticsModel
         public virtual AFP AFP { get; set; }
         public virtual EPS EPS { get; set; }
         public virtual MaritalStatus MaritalStatus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Holding> Holding { get; set; }
+        public virtual EmployeeDocuments EmployeeDocuments { get; set; }
     }
 }
