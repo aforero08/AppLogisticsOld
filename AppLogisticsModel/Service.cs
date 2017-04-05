@@ -39,7 +39,6 @@ namespace AppLogisticsModel
         public virtual Activity Activity { get; set; }
         public virtual Carrier Carrier { get; set; }
         public virtual Client Client { get; set; }
-        public virtual ClientArea ClientArea { get; set; }
         public virtual Product Product { get; set; }
         public virtual VehicleType VehicleType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

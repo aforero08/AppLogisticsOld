@@ -1,4 +1,4 @@
-﻿@model AppLogistics.Models.Employee
+﻿@model AppLogisticsModel.Employee
 
 @{
     ViewBag.Title = "Details";
@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Document)
+            @Html.DisplayNameFor(model => model.DocumentNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Document)
+            @Html.DisplayFor(model => model.DocumentNumber)
         </dd>
 
         <dt>
@@ -43,11 +43,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.JoinDate)
+            @Html.DisplayNameFor(model => model.HireDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.JoinDate)
+            @Html.DisplayFor(model => model.HireDate)
         </dd>
 
         <dt>
@@ -75,6 +75,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.MobilePhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MobilePhone)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Phone)
         </dt>
 
@@ -83,11 +91,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MobilePhone)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MobilePhone)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
         <dt>
@@ -104,6 +112,46 @@
 
         <dd>
             @Html.DisplayFor(model => model.EmergencyContactPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AFP.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AFP.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EPS.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EPS.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaritalStatus.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaritalStatus.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeDocuments.EmployeeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeDocuments.EmployeeId)
         </dd>
 
     </dl>

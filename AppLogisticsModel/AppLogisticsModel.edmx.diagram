@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d38c34b015794f0ba2fbafe482960f68" Name="Diagram1" ZoomLevel="86">
+      <Diagram DiagramId="d38c34b015794f0ba2fbafe482960f68" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="AppLogisticsDBModel.AFP" Width="1.5" PointX="14.625" PointY="5.625" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.BranchOffice" Width="1.5" PointX="4.5" PointY="7" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.EPS" Width="1.5" PointX="14.625" PointY="6.5" IsExpanded="false" />
@@ -25,7 +25,6 @@
         <AssociationConnector Association="AppLogisticsDBModel.FK_ClientArea_Client" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Rate_Client" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Service_Client" />
-        <AssociationConnector Association="AppLogisticsDBModel.FK_Service_ClientArea" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Employee_EPS" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Employee_MaritalStatus" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Service_Product" />
@@ -35,7 +34,7 @@
         <EntityTypeShape EntityType="AppLogisticsDBModel.Holding" Width="1.5" PointX="10.375" PointY="5.75" IsExpanded="false" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Holding_Employee" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Holding_Service" />
-        <EntityTypeShape EntityType="AppLogisticsDBModel.EmployeeDocuments" Width="1.5" PointX="12.5" PointY="6.875" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.EmployeeDocuments" Width="1.5" PointX="12.5" PointY="6.875" IsExpanded="false" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_EmployeeDocuments_Employee" />
       </Diagram>
     </edmx:Diagrams>

@@ -187,27 +187,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AFPsController.cs" />
+    <Compile Include="Controllers\BranchOfficesController.cs" />
+    <Compile Include="Controllers\CarriersController.cs" />
+    <Compile Include="Controllers\ClientAreasController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\EmployeeDocumentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\EPSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MaritalStatusController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RatesController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\VehicleTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703280324545_Initial.cs" />
-    <Compile Include="Migrations\201703280324545_Initial.Designer.cs">
-      <DependentUpon>201703280324545_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703290144478_20170328.cs" />
-    <Compile Include="Migrations\201703290144478_20170328.Designer.cs">
-      <DependentUpon>201703290144478_20170328.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703290440183_asd.cs" />
-    <Compile Include="Migrations\201703290440183_asd.Designer.cs">
-      <DependentUpon>201703290440183_asd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -287,21 +285,76 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\EPS\Create.cshtml" />
-    <Content Include="Views\EPS\Delete.cshtml" />
-    <Content Include="Views\EPS\Details.cshtml" />
-    <Content Include="Views\EPS\Edit.cshtml" />
-    <Content Include="Views\EPS\Index.cshtml" />
+    <Content Include="Views\BranchOffices\Create.cshtml" />
+    <Content Include="Views\BranchOffices\Delete.cshtml" />
+    <Content Include="Views\BranchOffices\Details.cshtml" />
+    <Content Include="Views\BranchOffices\Edit.cshtml" />
+    <Content Include="Views\BranchOffices\Index.cshtml" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
     <Content Include="Views\AFPs\Create.cshtml" />
     <Content Include="Views\AFPs\Delete.cshtml" />
     <Content Include="Views\AFPs\Details.cshtml" />
     <Content Include="Views\AFPs\Edit.cshtml" />
     <Content Include="Views\AFPs\Index.cshtml" />
+    <Content Include="Views\Carriers\Create.cshtml" />
+    <Content Include="Views\Carriers\Delete.cshtml" />
+    <Content Include="Views\Carriers\Details.cshtml" />
+    <Content Include="Views\Carriers\Edit.cshtml" />
+    <Content Include="Views\Carriers\Index.cshtml" />
+    <Content Include="Views\Clients\Create.cshtml" />
+    <Content Include="Views\Clients\Delete.cshtml" />
+    <Content Include="Views\Clients\Details.cshtml" />
+    <Content Include="Views\Clients\Edit.cshtml" />
+    <Content Include="Views\Clients\Index.cshtml" />
+    <Content Include="Views\ClientAreas\Create.cshtml" />
+    <Content Include="Views\ClientAreas\Delete.cshtml" />
+    <Content Include="Views\ClientAreas\Details.cshtml" />
+    <Content Include="Views\ClientAreas\Edit.cshtml" />
+    <Content Include="Views\ClientAreas\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\EmployeeDocuments\Create.cshtml" />
+    <Content Include="Views\EmployeeDocuments\Delete.cshtml" />
+    <Content Include="Views\EmployeeDocuments\Details.cshtml" />
+    <Content Include="Views\EmployeeDocuments\Edit.cshtml" />
+    <Content Include="Views\EmployeeDocuments\Index.cshtml" />
+    <Content Include="Views\EPS\Create.cshtml" />
+    <Content Include="Views\EPS\Delete.cshtml" />
+    <Content Include="Views\EPS\Details.cshtml" />
+    <Content Include="Views\EPS\Edit.cshtml" />
+    <Content Include="Views\EPS\Index.cshtml" />
+    <Content Include="Views\MaritalStatus\Create.cshtml" />
+    <Content Include="Views\MaritalStatus\Delete.cshtml" />
+    <Content Include="Views\MaritalStatus\Details.cshtml" />
+    <Content Include="Views\MaritalStatus\Edit.cshtml" />
+    <Content Include="Views\MaritalStatus\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Rates\Create.cshtml" />
+    <Content Include="Views\Rates\Delete.cshtml" />
+    <Content Include="Views\Rates\Details.cshtml" />
+    <Content Include="Views\Rates\Edit.cshtml" />
+    <Content Include="Views\Rates\Index.cshtml" />
+    <Content Include="Views\Services\Create.cshtml" />
+    <Content Include="Views\Services\Delete.cshtml" />
+    <Content Include="Views\Services\Details.cshtml" />
+    <Content Include="Views\Services\Edit.cshtml" />
+    <Content Include="Views\Services\Index.cshtml" />
+    <Content Include="Views\VehicleTypes\Create.cshtml" />
+    <Content Include="Views\VehicleTypes\Delete.cshtml" />
+    <Content Include="Views\VehicleTypes\Details.cshtml" />
+    <Content Include="Views\VehicleTypes\Edit.cshtml" />
+    <Content Include="Views\VehicleTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -314,17 +367,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-3.1.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703280324545_Initial.resx">
-      <DependentUpon>201703280324545_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703290144478_20170328.resx">
-      <DependentUpon>201703290144478_20170328.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703290440183_asd.resx">
-      <DependentUpon>201703290440183_asd.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppLogisticsModel\AppLogisticsModel.csproj">

@@ -16,13 +16,14 @@
     [MaritalStatusId]       INT           NOT NULL,
     [AfpId]                 INT           NOT NULL,
     [EpsId]                 INT           NOT NULL,
-    [BranchOfficeId]        INT           NOT NULL,
     [Comments]              VARCHAR (500) NULL,
-    CONSTRAINT [PK__Employee__3214EC07D69A76D4] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [PK__Employee] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Employee_AFP] FOREIGN KEY ([AfpId]) REFERENCES [dbo].[AFP] ([Id]),
     CONSTRAINT [FK_Employee_EPS] FOREIGN KEY ([EpsId]) REFERENCES [dbo].[EPS] ([Id]),
     CONSTRAINT [FK_Employee_MaritalStatus] FOREIGN KEY ([MaritalStatusId]) REFERENCES [dbo].[MaritalStatus] ([Id])
 );
+
+
 
 
 

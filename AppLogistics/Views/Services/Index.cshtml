@@ -1,0 +1,111 @@
+﻿@model IEnumerable<AppLogisticsModel.Service>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExecutionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientAreaId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExternalId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoldingPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Carrier.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleType.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExecutionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientAreaId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExternalId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoldingPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activity.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Carrier.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleType.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

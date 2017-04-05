@@ -18,7 +18,7 @@ namespace AppLogisticsModel
         /// <summary>
         /// Nombre de la EPS
         /// </summary>
-        [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es obligatorio")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "El campo es obligatorio")]
         [StringLength(128, MinimumLength = 3)]
         [Display(Name = "Nombre")]
         public string Name;
@@ -28,7 +28,7 @@ namespace AppLogisticsModel
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "El campo es obligatorio")]
         [Display(Name = "NIT")]
-        [MinLength(9, ErrorMessage = "La longitud mínima es 9")]
+        //[MinLength(9, ErrorMessage = "La longitud mínima es 9")]
         public long NIT;
     }
 }

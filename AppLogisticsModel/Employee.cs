@@ -37,7 +37,6 @@ namespace AppLogisticsModel
         public int MaritalStatusId { get; set; }
         public int AfpId { get; set; }
         public int EpsId { get; set; }
-        public int BranchOfficeId { get; set; }
         public string Comments { get; set; }
     
         public virtual AFP AFP { get; set; }

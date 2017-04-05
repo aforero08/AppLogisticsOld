@@ -18,8 +18,8 @@ USING (VALUES
         (3, 'Horizonte', 800147502),
 		(4, 'Colfondos', 800227940)
 ) 
-AS Source (AfpId, Name, NIT) 
-ON Target.AfpId = Source.AfpId
+AS Source (Id, Name, NIT) 
+ON Target.Id = Source.Id
 WHEN NOT MATCHED BY TARGET THEN 
 INSERT (Name, NIT) 
 VALUES (Name, NIT);
@@ -38,8 +38,8 @@ USING (VALUES
 		(9, 'Nueva EPS', 900156264),
 		(10, 'Capital Salud', 900298372)
 ) 
-AS Source (EpsId, Name, NIT) 
-ON Target.EpsId = Source.EpsId
+AS Source (Id, Name, NIT) 
+ON Target.Id = Source.Id
 WHEN NOT MATCHED BY TARGET THEN 
 INSERT (Name, NIT) 
 VALUES (Name, NIT);

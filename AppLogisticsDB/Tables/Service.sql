@@ -18,10 +18,11 @@
     CONSTRAINT [FK_Service_Activity] FOREIGN KEY ([ActivityId]) REFERENCES [dbo].[Activity] ([Id]),
     CONSTRAINT [FK_Service_Carrier] FOREIGN KEY ([CarrierId]) REFERENCES [dbo].[Carrier] ([Id]),
     CONSTRAINT [FK_Service_Client] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([Id]),
-    CONSTRAINT [FK_Service_ClientArea] FOREIGN KEY ([ClientAreaId]) REFERENCES [dbo].[ClientArea] ([Id]),
     CONSTRAINT [FK_Service_Product] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Product] ([Id]),
     CONSTRAINT [FK_Service_VehicleType] FOREIGN KEY ([VehicleTypeId]) REFERENCES [dbo].[VehicleType] ([Id])
 );
+
+
 
 
 

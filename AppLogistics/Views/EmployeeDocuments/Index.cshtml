@@ -1,0 +1,111 @@
+﻿@model IEnumerable<AppLogisticsModel.EmployeeDocuments>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentCopy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MilitaryIdCopy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaborCertification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonalReference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinaryBackground)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KnowledgeTest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdmissionTest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contract)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InternalRegulations)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndownmentLetter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CriticalPosition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentCopy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Photos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MilitaryIdCopy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaborCertification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonalReference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinaryBackground)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KnowledgeTest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdmissionTest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contract)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InternalRegulations)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndownmentLetter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CriticalPosition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EmployeeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeId })
+        </td>
+    </tr>
+}
+
+</table>

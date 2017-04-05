@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using AppLogistics.Models;
+using AppLogisticsModel;
 
 namespace AppLogistics.Controllers
 {
     public class AFPsController : Controller
     {
-        private AppLogisticsContext db = new AppLogisticsContext();
+        private AppLogisticsDBEntities db = new AppLogisticsDBEntities();
 
         // GET: AFPs
         public async Task<ActionResult> Index()
         {
-            return View(await db.AFPs.ToListAsync());
+            return View(await db.AFP.ToListAsync());
         }
 
         // GET: AFPs/Details/5
@@ -28,7 +28,7 @@ namespace AppLogistics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AFP aFP = await db.AFPs.FindAsync(id);
+            AFP aFP = await db.AFP.FindAsync(id);
             if (aFP == null)
             {
                 return HttpNotFound();
@@ -47,11 +47,11 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,NIT")] AFP aFP)
+        public async Task<ActionResult> Create([Bind(Include = "Name,NIT,Id")] AFP aFP)
         {
             if (ModelState.IsValid)
             {
-                db.AFPs.Add(aFP);
+                db.AFP.Add(aFP);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace AppLogistics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AFP aFP = await db.AFPs.FindAsync(id);
+            AFP aFP = await db.AFP.FindAsync(id);
             if (aFP == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,NIT")] AFP aFP)
+        public async Task<ActionResult> Edit([Bind(Include = "Name,NIT,Id")] AFP aFP)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace AppLogistics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AFP aFP = await db.AFPs.FindAsync(id);
+            AFP aFP = await db.AFP.FindAsync(id);
             if (aFP == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace AppLogistics.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            AFP aFP = await db.AFPs.FindAsync(id);
-            db.AFPs.Remove(aFP);
+            AFP aFP = await db.AFP.FindAsync(id);
+            db.AFP.Remove(aFP);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

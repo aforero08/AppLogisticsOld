@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.ComponentModel.DataAnnotations;
 using AppLogisticsModel;
 
 namespace AppLogistics.Controllers
 {
-    [Authorize]
     public class EPSController : Controller
     {
-        private AppLogisticsModel.AppLogisticsDBEntities db = new AppLogisticsDBEntities();
+        private AppLogisticsDBEntities db = new AppLogisticsDBEntities();
 
         // GET: EPS
         public async Task<ActionResult> Index()
@@ -49,7 +47,7 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name,NIT")] EPS ePS)
+        public async Task<ActionResult> Create([Bind(Include = "Name,NIT,Id")] EPS ePS)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +79,7 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,NIT")] EPS ePS)
+        public async Task<ActionResult> Edit([Bind(Include = "Name,NIT,Id")] EPS ePS)
         {
             if (ModelState.IsValid)
             {
