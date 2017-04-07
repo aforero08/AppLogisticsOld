@@ -10,9 +10,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AppLogistics.Models;
 
+using AppLogistics.Helpers;
+
 namespace AppLogistics.Controllers
 {
-    [Authorize]
+    [AppLogisticsAuthorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -75,7 +77,7 @@ namespace AppLogistics.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -93,7 +95,6 @@ namespace AppLogistics.Controllers
 
         //
         // GET: /Account/VerifyCode
-        [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
@@ -107,7 +108,6 @@ namespace AppLogistics.Controllers
         //
         // POST: /Account/VerifyCode
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
@@ -136,7 +136,6 @@ namespace AppLogistics.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -145,7 +144,6 @@ namespace AppLogistics.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -155,6 +153,7 @@ namespace AppLogistics.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // No iniciar sesión automáticamente. Solo crea usuarios el administrador
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -174,7 +173,6 @@ namespace AppLogistics.Controllers
 
         //
         // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -329,7 +327,7 @@ namespace AppLogistics.Controllers
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: true);
             switch (result)
             {
                 case SignInStatus.Success:

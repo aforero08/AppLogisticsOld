@@ -48,7 +48,7 @@
                                 <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "MaritalStatus" ? "active" : "")">@Html.ActionLink("Estados civiles", "Index", "MaritalStatus")</li>
                             </ul>
                         </li>
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">@Html.ActionLink("Acerca de", "About", "Home")</li>
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">@Html.ActionLink("Nosotros", "About", "Home")</li>
                         <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
