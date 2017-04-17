@@ -1,6 +1,9 @@
-﻿using System;
+﻿using AppLogistics.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -27,7 +30,7 @@ namespace AppLogistics.Helpers
                     filterContext.Result = new HttpUnauthorizedResult();
                     return;
                 }
-                else if (!AccessValidate(System.Web.Security.Roles.GetRolesForUser(), controllerFullName, actionName))
+                else if (!AccessValidate(filterContext.HttpContext.User.Identity.Name, controllerFullName, actionName))
                 {
                     var url = new UrlHelper(filterContext.RequestContext);
                     var accessDenied = url.Action("AccessDenied", "Home", null);
@@ -49,9 +52,10 @@ namespace AppLogistics.Helpers
                     base.OnAuthorization(filterContext);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //TODO: log error
+
                 filterContext.Result = new HttpUnauthorizedResult();
                 return;
             }
@@ -65,8 +69,10 @@ namespace AppLogistics.Helpers
         /// <param name="controller">Controlador al que se intenta acceder</param>
         /// <param name="action">Acción que se intenta ejecutar</param>
         /// <returns></returns>
-        private bool AccessValidate(string[] role, string controller, string action)
+        private bool AccessValidate(string userName, string controller, string action)
         {
+            List<string> role = getUserRoles(userName);
+
             bool isAllowed = false;
             switch (controller)
             {
@@ -99,69 +105,23 @@ namespace AppLogistics.Helpers
                         || (role.Contains("Consulta Básica") && action.Contains("Search")))
                         isAllowed = true;
                     break;
-                case "CrossFileSplit":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "Home":
-                    isAllowed = true;
-                    break;
-                case "Item":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail") || role.Contains("Operador"))
-                        isAllowed = true;
-                    break;
-                case "Log":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "MailTest":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "ObjectType":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "Parameter":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "Process":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail") || role.Contains("Operador"))
-                        isAllowed = true;
-                    break;
-                case "Product":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "Reports":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail") || role.Contains("Consulta")
-                        || (role.Contains("Consulta Básica") && action.Contains("HistoricalFilter")))
-                        isAllowed = true;
-                    break;
-                case "Smtp":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "Pop3":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "State":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail") || role.Contains("Operador") || role.Contains("Verificador"))
-                        isAllowed = true;
-                    break;
-                case "Subject":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
-                case "User":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
-                        isAllowed = true;
-                    break;
+                
             }
 
             return isAllowed;
+        }
+
+
+
+        private List<string> getUserRoles(string userName)
+        {
+            ApplicationDbContext context = ApplicationDbContext.Create();
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            ApplicationUser user = context.Users.Where(u => u.UserName.Equals(userName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+
+            var roles = userManager.GetRolesAsync(user.Id);
+
+            return roles.Result.ToList();
         }
     }
 }

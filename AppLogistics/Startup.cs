@@ -4,6 +4,7 @@ using Owin;
 using AppLogistics.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 [assembly: OwinStartupAttribute(typeof(AppLogistics.Startup))]
 namespace AppLogistics
@@ -17,7 +18,7 @@ namespace AppLogistics
             // Crear roles
             ConfigureRoles();
 
-            // Crear y configurar administrador
+            // Crear y configurar administrador por defecto
             CreateAdmin();
         }
 
@@ -72,13 +73,14 @@ namespace AppLogistics
             ApplicationDbContext context = new ApplicationDbContext();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            if (userManager.FindByName("AdminAppLogistics") == null)
+            if (userManager.FindByName(ConfigurationManager.AppSettings["Users.AdminAppLogistics.Username"]) == null)
             {
                 var user = new ApplicationUser();
-                user.UserName = "AdminAppLogistics@applogistics.com.co";
-                user.Email = "AdminAppLogistics@applogistics.com.co";
+                user.UserName = ConfigurationManager.AppSettings["Users.AdminAppLogistics.Username"];
+                user.Email = ConfigurationManager.AppSettings["Users.AdminAppLogistics.Email"]; ;
                 user.LockoutEnabled = true;
-                string userPWD = "Colombia$1";
+                user.EmailConfirmed = true;
+                string userPWD = ConfigurationManager.AppSettings["Users.AdminAppLogistics.Password"]; ;
 
                 var chkUser = userManager.Create(user, userPWD);
 

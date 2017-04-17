@@ -14,7 +14,7 @@ using AppLogistics.Helpers;
 
 namespace AppLogistics.Controllers
 {
-    [AppLogisticsAuthorize]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -75,6 +75,19 @@ namespace AppLogistics.Controllers
                 return View(model);
             }
 
+            // Require the user to have a confirmed email before they can log on.
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id);
+
+                    ViewBag.errorMessage = "Debes confirmar tu correo para poder iniciar sesión";
+                    return View("Error");
+                }
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: true);
@@ -88,7 +101,7 @@ namespace AppLogistics.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Intento de autenticación inválido.");
                     return View(model);
             }
         }
@@ -136,6 +149,7 @@ namespace AppLogistics.Controllers
 
         //
         // GET: /Account/Register
+        [AppLogisticsAuthorize]
         public ActionResult Register()
         {
             return View();
@@ -145,6 +159,7 @@ namespace AppLogistics.Controllers
         // POST: /Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AppLogisticsAuthorize]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -153,16 +168,17 @@ namespace AppLogistics.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // Añadir por defecto rol con menor prioridad
+                    UserManager.AddToRole(user.Id, "Visitante");
+
                     // No iniciar sesión automáticamente. Solo crea usuarios el administrador
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    await SendEmailConfirmationTokenAsync(user.Id);
+                    
+                    return RedirectToAction("RegisterConfirmation");
                 }
                 AddErrors(result);
             }
@@ -171,8 +187,18 @@ namespace AppLogistics.Controllers
             return View(model);
         }
 
+
+        // GET: /Account/Register
+        [AppLogisticsAuthorize]
+        public ActionResult RegisterConfirmation()
+        {
+            return View();
+        }
+
+
         //
         // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -209,10 +235,9 @@ namespace AppLogistics.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                await SendPasswordResetTokenAsync(user.Id);
+                
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -272,7 +297,6 @@ namespace AppLogistics.Controllers
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
@@ -282,7 +306,6 @@ namespace AppLogistics.Controllers
 
         //
         // GET: /Account/SendCode
-        [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
@@ -298,7 +321,6 @@ namespace AppLogistics.Controllers
         //
         // POST: /Account/SendCode
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
@@ -317,7 +339,6 @@ namespace AppLogistics.Controllers
 
         //
         // GET: /Account/ExternalLoginCallback
-        [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -348,7 +369,6 @@ namespace AppLogistics.Controllers
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
@@ -420,6 +440,42 @@ namespace AppLogistics.Controllers
 
             base.Dispose(disposing);
         }
+
+        private async Task<string> SendEmailConfirmationTokenAsync(string userID)
+        {
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(userID);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+
+            IdentityMessage msg = new IdentityMessage
+            {
+                Destination = UserManager.GetEmail(userID),
+                Body = "Confirma tu correo en el siguiente enlace: " + callbackUrl,
+                Subject = "AppLogistics - Confirma tu correo"
+            };
+            await UserManager.EmailService.SendAsync(msg);
+            //await UserManager.SendEmailAsync(userID, subject, "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+            return callbackUrl;
+        }
+
+
+        private async Task<string> SendPasswordResetTokenAsync(string userID)
+        {
+            string code = await UserManager.GeneratePasswordResetTokenAsync(userID);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = userID, code = code }, protocol: Request.Url.Scheme);
+
+            IdentityMessage msg = new IdentityMessage
+            {
+                Destination = UserManager.GetEmail(userID),
+                Body = "Reinicia tu contraseña en el siguiente enlace: " + callbackUrl,
+                Subject = "AppLogistics - Reinicia tu contraseña"
+            };
+            await UserManager.EmailService.SendAsync(msg);
+
+            return callbackUrl;
+        }
+
+
 
         #region Helpers
         // Used for XSRF protection when adding external logins
