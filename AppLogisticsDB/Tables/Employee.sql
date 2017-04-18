@@ -9,7 +9,7 @@
     [City]                  VARCHAR (64)  NOT NULL,
     [Address]               VARCHAR (64)  NOT NULL,
     [MobilePhone]           VARCHAR (50)  NULL,
-    [Phone]                 VARCHAR (50)  NOT NULL,
+    [Phone]                 VARCHAR (50)  NULL,
     [Email]                 VARCHAR (256) NULL,
     [EmergencyContact]      VARCHAR (128) NULL,
     [EmergencyContactPhone] VARCHAR (50)  NULL,

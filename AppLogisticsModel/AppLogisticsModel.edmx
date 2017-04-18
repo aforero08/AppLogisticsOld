@@ -69,7 +69,7 @@
           <Property Name="City" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="MobilePhone" Type="varchar" MaxLength="50" />
-          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="256" />
           <Property Name="EmergencyContact" Type="varchar" MaxLength="128" />
           <Property Name="EmergencyContactPhone" Type="varchar" MaxLength="50" />
@@ -125,7 +125,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Rate">
@@ -617,7 +617,7 @@
           <Property Name="City" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="EmergencyContact" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="EmergencyContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />

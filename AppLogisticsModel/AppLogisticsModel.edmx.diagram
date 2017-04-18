@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="AppLogisticsDBModel.EPS" Width="1.5" PointX="14.625" PointY="6.5" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.MaritalStatus" Width="1.5" PointX="14.625" PointY="4.75" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.Activity" Width="1.5" PointX="5.5" PointY="4.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="AppLogisticsDBModel.Carrier" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.Carrier" Width="1.5" PointX="8.5" PointY="3.625" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.Client" Width="1.5" PointX="5.5" PointY="6" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.ClientArea" Width="1.5" PointX="6.375" PointY="7" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.Employee" Width="1.5" PointX="12.5" PointY="5.75" IsExpanded="false" />
