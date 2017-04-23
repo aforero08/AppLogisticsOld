@@ -38,12 +38,24 @@ namespace AppLogisticsModel
         public int AfpId { get; set; }
         public int EpsId { get; set; }
         public string Comments { get; set; }
+        public bool CV { get; set; }
+        public bool DocumentCopy { get; set; }
+        public bool Photos { get; set; }
+        public bool MilitaryIdCopy { get; set; }
+        public bool LaborCertification { get; set; }
+        public bool PersonalReference { get; set; }
+        public bool DisciplinaryBackground { get; set; }
+        public bool KnowledgeTest { get; set; }
+        public bool AdmissionTest { get; set; }
+        public bool Contract { get; set; }
+        public bool InternalRegulations { get; set; }
+        public bool EndownmentLetter { get; set; }
+        public bool CriticalPosition { get; set; }
     
         public virtual AFP AFP { get; set; }
         public virtual EPS EPS { get; set; }
         public virtual MaritalStatus MaritalStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Holding> Holding { get; set; }
-        public virtual EmployeeDocuments EmployeeDocuments { get; set; }
     }
 }

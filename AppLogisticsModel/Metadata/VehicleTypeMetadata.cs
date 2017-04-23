@@ -7,27 +7,19 @@ using System.Threading.Tasks;
 
 namespace AppLogisticsModel
 {
-    [MetadataType(typeof(AfpMetadata))]
-    public partial class AFP
+    [MetadataType(typeof(VehicleTypeMetadata))]
+    public partial class Vehicle
     {
     }
 
-    public class AfpMetadata
+    public class VehicleTypeMetadata
     {
         /// <summary>
-        /// Nombre de la AFP
+        /// Nombre del vehículo
         /// </summary>
         [Required(AllowEmptyStrings = false)]
-        [StringLength(128, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 3)]
         [Display(Name = "Nombre")]
         public string Name;
-
-        /// <summary>
-        /// NIT de la AFP
-        /// </summary>
-        [Required(AllowEmptyStrings = false)]
-        [Display(Name = "NIT")]
-        [MinLength(9)]
-        public long NIT;
     }
 }

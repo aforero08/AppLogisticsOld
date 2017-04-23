@@ -80,7 +80,6 @@
     <Build Include="Tables\Carrier.sql" />
     <Build Include="Tables\Activity.sql" />
     <Build Include="Tables\Holding.sql" />
-    <Build Include="Tables\EmployeeDocuments.sql" />
     <Build Include="Tables\AspNetUsers.sql" />
     <Build Include="Tables\AspNetUserRoles.sql" />
     <Build Include="Tables\AspNetUserLogins.sql" />

@@ -34,8 +34,6 @@
         <EntityTypeShape EntityType="AppLogisticsDBModel.Holding" Width="1.5" PointX="10.375" PointY="5.75" IsExpanded="false" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Holding_Employee" />
         <AssociationConnector Association="AppLogisticsDBModel.FK_Holding_Service" />
-        <EntityTypeShape EntityType="AppLogisticsDBModel.EmployeeDocuments" Width="1.5" PointX="12.5" PointY="6.875" IsExpanded="false" />
-        <AssociationConnector Association="AppLogisticsDBModel.FK_EmployeeDocuments_Employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -39,6 +39,5 @@ namespace AppLogisticsModel
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<VehicleType> VehicleType { get; set; }
         public virtual DbSet<Holding> Holding { get; set; }
-        public virtual DbSet<EmployeeDocuments> EmployeeDocuments { get; set; }
     }
 }

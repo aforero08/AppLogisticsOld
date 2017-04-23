@@ -7,27 +7,19 @@ using System.Threading.Tasks;
 
 namespace AppLogisticsModel
 {
-    [MetadataType(typeof(EpsMetadata))]
-    public partial class EPS
+    [MetadataType(typeof(BranchOfficeMetadata))]
+    public partial class BranchOffice
     {
     }
-    
-    public class EpsMetadata
+
+    public class BranchOfficeMetadata
     {
         /// <summary>
-        /// Nombre de la EPS
+        /// Nombre de la sucursal
         /// </summary>
         [Required(AllowEmptyStrings = false)]
         [StringLength(128, MinimumLength = 3)]
         [Display(Name = "Nombre")]
         public string Name;
-
-        /// <summary>
-        /// NIT de la EPS
-        /// </summary>
-        [Required(AllowEmptyStrings = false)]
-        [Display(Name = "NIT")]
-        [MinLength(9)]
-        public long NIT;
     }
 }

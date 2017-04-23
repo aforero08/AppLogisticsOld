@@ -18,7 +18,7 @@ namespace AppLogistics.Controllers
         // GET: Employees
         public async Task<ActionResult> Index()
         {
-            var employee = db.Employee.Include(e => e.AFP).Include(e => e.EPS).Include(e => e.MaritalStatus).Include(e => e.EmployeeDocuments);
+            var employee = db.Employee.Include(e => e.AFP).Include(e => e.EPS).Include(e => e.MaritalStatus);
             return View(await employee.ToListAsync());
         }
 
@@ -43,7 +43,6 @@ namespace AppLogistics.Controllers
             ViewBag.AfpId = new SelectList(db.AFP, "Id", "Name");
             ViewBag.EpsId = new SelectList(db.EPS, "Id", "Name");
             ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "Name");
-            ViewBag.Id = new SelectList(db.EmployeeDocuments, "EmployeeId", "EmployeeId");
             return View();
         }
 
@@ -52,7 +51,7 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,DocumentNumber,Name,Surname,BornDate,HireDate,RetirementDate,City,Address,MobilePhone,Phone,Email,EmergencyContact,EmergencyContactPhone,MaritalStatusId,AfpId,EpsId,BranchOfficeId,Comments")] Employee employee)
+        public async Task<ActionResult> Create([Bind(Include = "Id,DocumentNumber,Name,Surname,BornDate,HireDate,RetirementDate,City,Address,MobilePhone,Phone,Email,EmergencyContact,EmergencyContactPhone,MaritalStatusId,AfpId,EpsId,Comments,CV,DocumentCopy,Photos,MilitaryIdCopy,LaborCertification,PersonalReference,DisciplinaryBackground,KnowledgeTest,AdmissionTest,Contract,InternalRegulations,EndownmentLetter,CriticalPosition")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +63,6 @@ namespace AppLogistics.Controllers
             ViewBag.AfpId = new SelectList(db.AFP, "Id", "Name", employee.AfpId);
             ViewBag.EpsId = new SelectList(db.EPS, "Id", "Name", employee.EpsId);
             ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "Name", employee.MaritalStatusId);
-            ViewBag.Id = new SelectList(db.EmployeeDocuments, "EmployeeId", "EmployeeId", employee.Id);
             return View(employee);
         }
 
@@ -83,7 +81,6 @@ namespace AppLogistics.Controllers
             ViewBag.AfpId = new SelectList(db.AFP, "Id", "Name", employee.AfpId);
             ViewBag.EpsId = new SelectList(db.EPS, "Id", "Name", employee.EpsId);
             ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "Name", employee.MaritalStatusId);
-            ViewBag.Id = new SelectList(db.EmployeeDocuments, "EmployeeId", "EmployeeId", employee.Id);
             return View(employee);
         }
 
@@ -92,7 +89,7 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,DocumentNumber,Name,Surname,BornDate,HireDate,RetirementDate,City,Address,MobilePhone,Phone,Email,EmergencyContact,EmergencyContactPhone,MaritalStatusId,AfpId,EpsId,BranchOfficeId,Comments")] Employee employee)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,DocumentNumber,Name,Surname,BornDate,HireDate,RetirementDate,City,Address,MobilePhone,Phone,Email,EmergencyContact,EmergencyContactPhone,MaritalStatusId,AfpId,EpsId,Comments,CV,DocumentCopy,Photos,MilitaryIdCopy,LaborCertification,PersonalReference,DisciplinaryBackground,KnowledgeTest,AdmissionTest,Contract,InternalRegulations,EndownmentLetter,CriticalPosition")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +100,6 @@ namespace AppLogistics.Controllers
             ViewBag.AfpId = new SelectList(db.AFP, "Id", "Name", employee.AfpId);
             ViewBag.EpsId = new SelectList(db.EPS, "Id", "Name", employee.EpsId);
             ViewBag.MaritalStatusId = new SelectList(db.MaritalStatus, "Id", "Name", employee.MaritalStatusId);
-            ViewBag.Id = new SelectList(db.EmployeeDocuments, "EmployeeId", "EmployeeId", employee.Id);
             return View(employee);
         }
 

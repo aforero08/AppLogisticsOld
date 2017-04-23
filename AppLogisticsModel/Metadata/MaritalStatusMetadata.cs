@@ -7,27 +7,19 @@ using System.Threading.Tasks;
 
 namespace AppLogisticsModel
 {
-    [MetadataType(typeof(AfpMetadata))]
-    public partial class AFP
+    [MetadataType(typeof(MaritalStatusMetadata))]
+    public partial class MaritalStatus
     {
     }
 
-    public class AfpMetadata
+    public class MaritalStatusMetadata
     {
         /// <summary>
-        /// Nombre de la AFP
+        /// Nombre del estado civil
         /// </summary>
         [Required(AllowEmptyStrings = false)]
-        [StringLength(128, MinimumLength = 3)]
+        [StringLength(64, MinimumLength = 3)]
         [Display(Name = "Nombre")]
         public string Name;
-
-        /// <summary>
-        /// NIT de la AFP
-        /// </summary>
-        [Required(AllowEmptyStrings = false)]
-        [Display(Name = "NIT")]
-        [MinLength(9)]
-        public long NIT;
     }
 }

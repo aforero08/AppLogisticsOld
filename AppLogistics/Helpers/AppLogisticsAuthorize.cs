@@ -25,12 +25,16 @@ namespace AppLogistics.Helpers
 
             try
             {
+                /*
+                // Obligar a que todos estén autenticados...
                 if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
                 {
                     filterContext.Result = new HttpUnauthorizedResult();
                     return;
                 }
-                else if (!AccessValidate(filterContext.HttpContext.User.Identity.Name, controllerFullName, actionName))
+                else 
+                */
+                if (!AccessValidate(filterContext.HttpContext.User.Identity.Name, controllerFullName, actionName))
                 {
                     var url = new UrlHelper(filterContext.RequestContext);
                     var accessDenied = url.Action("AccessDenied", "Home", null);
@@ -71,41 +75,72 @@ namespace AppLogistics.Helpers
         /// <returns></returns>
         private bool AccessValidate(string userName, string controller, string action)
         {
-            List<string> role = getUserRoles(userName);
+            List<string> role = GetUserRoles(userName);
 
             bool isAllowed = false;
             switch (controller)
             {
                 case "Account":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;
                     break;
-                case "Attachment":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail") || role.Contains("Operador"))
+                case "Activities":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;
                     break;
-                case "BillTemplate":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
+                case "AFPs":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;
                     break;
-                case "BodyTemplate":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
+                case "BranchOffices":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;
                     break;
-                case "BodyTemplateCondition":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail"))
+                case "Carriers":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;
                     break;
-                case "Client":
-                    if (role.Contains("Administrador") || role.Contains("AdministradorMail") || role.Contains("Consulta")
-                        || (role.Contains("Consulta Básica") && action.Contains("Search"))
-                        || (role.Contains("Consulta Básica") && action.Contains("Details"))
-                        || (role.Contains("Consulta Básica") && action.Contains("Create"))
-                        || (role.Contains("Consulta Básica") && action.Contains("Edit"))
-                        || (role.Contains("Consulta Básica") && action.Contains("Search")))
+                case "ClientAreas":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;
                     break;
-                
+                case "Clients":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+                case "Employees":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+                case "EPS":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+                case "Manage":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+                case "MaritalStatus":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+                case "Products":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+                case "Rates":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+                case "Services":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+                case "VehicleTypes":
+                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                        isAllowed = true;
+                    break;
+
             }
 
             return isAllowed;
@@ -113,7 +148,7 @@ namespace AppLogistics.Helpers
 
 
 
-        private List<string> getUserRoles(string userName)
+        private List<string> GetUserRoles(string userName)
         {
             ApplicationDbContext context = ApplicationDbContext.Create();
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));

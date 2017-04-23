@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace AppLogisticsModel
 {
-    [MetadataType(typeof(EpsMetadata))]
-    public partial class EPS
+    [MetadataType(typeof(CarrierMetadata))]
+    public partial class Carrier
     {
     }
-    
-    public class EpsMetadata
+
+    public class CarrierMetadata
     {
         /// <summary>
-        /// Nombre de la EPS
+        /// Nombre de la transportadora
         /// </summary>
         [Required(AllowEmptyStrings = false)]
         [StringLength(128, MinimumLength = 3)]
@@ -23,7 +23,7 @@ namespace AppLogisticsModel
         public string Name;
 
         /// <summary>
-        /// NIT de la EPS
+        /// NIT de la transportadora
         /// </summary>
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "NIT")]

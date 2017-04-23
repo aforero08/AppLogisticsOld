@@ -68,7 +68,7 @@
           <Property Name="RetirementDate" Type="date" />
           <Property Name="City" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="64" Nullable="false" />
-          <Property Name="MobilePhone" Type="varchar" MaxLength="50" />
+          <Property Name="MobilePhone" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="256" />
           <Property Name="EmergencyContact" Type="varchar" MaxLength="128" />
@@ -76,13 +76,6 @@
           <Property Name="MaritalStatusId" Type="int" Nullable="false" />
           <Property Name="AfpId" Type="int" Nullable="false" />
           <Property Name="EpsId" Type="int" Nullable="false" />
-          <Property Name="Comments" Type="varchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="EmployeeDocuments">
-          <Key>
-            <PropertyRef Name="EmployeeId" />
-          </Key>
-          <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="CV" Type="bit" Nullable="false" />
           <Property Name="DocumentCopy" Type="bit" Nullable="false" />
           <Property Name="Photos" Type="bit" Nullable="false" />
@@ -96,6 +89,7 @@
           <Property Name="InternalRegulations" Type="bit" Nullable="false" />
           <Property Name="EndownmentLetter" Type="bit" Nullable="false" />
           <Property Name="CriticalPosition" Type="bit" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="EPS">
           <Key>
@@ -223,20 +217,6 @@
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="MaritalStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmployeeDocuments_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="EmployeeDocuments" Type="Self.EmployeeDocuments" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EmployeeDocuments">
-              <PropertyRef Name="EmployeeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -368,7 +348,6 @@
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientArea" EntityType="Self.ClientArea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EmployeeDocuments" EntityType="Self.EmployeeDocuments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EPS" EntityType="Self.EPS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Holding" EntityType="Self.Holding" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaritalStatus" EntityType="Self.MaritalStatus" Schema="dbo" store:Type="Tables" />
@@ -395,10 +374,6 @@
           <AssociationSet Name="FK_Employee_MaritalStatus" Association="Self.FK_Employee_MaritalStatus">
             <End Role="MaritalStatus" EntitySet="MaritalStatus" />
             <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmployeeDocuments_Employee" Association="Self.FK_EmployeeDocuments_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="EmployeeDocuments" EntitySet="EmployeeDocuments" />
           </AssociationSet>
           <AssociationSet Name="FK_Holding_Employee" Association="Self.FK_Holding_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -554,11 +529,6 @@
             <End Role="Service" EntitySet="Service" />
             <End Role="Holding" EntitySet="Holding" />
           </AssociationSet>
-          <EntitySet Name="EmployeeDocuments" EntityType="AppLogisticsDBModel.EmployeeDocuments" />
-          <AssociationSet Name="FK_EmployeeDocuments_Employee" Association="AppLogisticsDBModel.FK_EmployeeDocuments_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="EmployeeDocuments" EntitySet="EmployeeDocuments" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Activity">
           <Key>
@@ -616,7 +586,7 @@
           <Property Name="RetirementDate" Type="DateTime" Precision="0" />
           <Property Name="City" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="EmergencyContact" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
@@ -629,7 +599,19 @@
           <NavigationProperty Name="EPS" Relationship="AppLogisticsDBModel.FK_Employee_EPS" FromRole="Employee" ToRole="EPS" />
           <NavigationProperty Name="MaritalStatus" Relationship="AppLogisticsDBModel.FK_Employee_MaritalStatus" FromRole="Employee" ToRole="MaritalStatus" />
           <NavigationProperty Name="Holding" Relationship="AppLogisticsDBModel.FK_Holding_Employee" FromRole="Employee" ToRole="Holding" />
-          <NavigationProperty Name="EmployeeDocuments" Relationship="AppLogisticsDBModel.FK_EmployeeDocuments_Employee" FromRole="Employee" ToRole="EmployeeDocuments" />
+          <Property Name="CV" Type="Boolean" Nullable="false" />
+          <Property Name="DocumentCopy" Type="Boolean" Nullable="false" />
+          <Property Name="Photos" Type="Boolean" Nullable="false" />
+          <Property Name="MilitaryIdCopy" Type="Boolean" Nullable="false" />
+          <Property Name="LaborCertification" Type="Boolean" Nullable="false" />
+          <Property Name="PersonalReference" Type="Boolean" Nullable="false" />
+          <Property Name="DisciplinaryBackground" Type="Boolean" Nullable="false" />
+          <Property Name="KnowledgeTest" Type="Boolean" Nullable="false" />
+          <Property Name="AdmissionTest" Type="Boolean" Nullable="false" />
+          <Property Name="Contract" Type="Boolean" Nullable="false" />
+          <Property Name="InternalRegulations" Type="Boolean" Nullable="false" />
+          <Property Name="EndownmentLetter" Type="Boolean" Nullable="false" />
+          <Property Name="CriticalPosition" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -879,40 +861,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="EmployeeDocuments">
-          <Key>
-            <PropertyRef Name="EmployeeId" />
-          </Key>
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="CV" Type="Boolean" Nullable="false" />
-          <Property Name="DocumentCopy" Type="Boolean" Nullable="false" />
-          <Property Name="Photos" Type="Boolean" Nullable="false" />
-          <Property Name="MilitaryIdCopy" Type="Boolean" Nullable="false" />
-          <Property Name="LaborCertification" Type="Boolean" Nullable="false" />
-          <Property Name="PersonalReference" Type="Boolean" Nullable="false" />
-          <Property Name="DisciplinaryBackground" Type="Boolean" Nullable="false" />
-          <Property Name="KnowledgeTest" Type="Boolean" Nullable="false" />
-          <Property Name="AdmissionTest" Type="Boolean" Nullable="false" />
-          <Property Name="Contract" Type="Boolean" Nullable="false" />
-          <Property Name="InternalRegulations" Type="Boolean" Nullable="false" />
-          <Property Name="EndownmentLetter" Type="Boolean" Nullable="false" />
-          <Property Name="CriticalPosition" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="AppLogisticsDBModel.FK_EmployeeDocuments_Employee" FromRole="EmployeeDocuments" ToRole="Employee" />
-        </EntityType>
-        <Association Name="FK_EmployeeDocuments_Employee">
-          <End Type="AppLogisticsDBModel.Employee" Role="Employee" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="AppLogisticsDBModel.EmployeeDocuments" Role="EmployeeDocuments" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="EmployeeDocuments">
-              <PropertyRef Name="EmployeeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -995,6 +943,19 @@
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="AppLogisticsDBModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="CriticalPosition" ColumnName="CriticalPosition" />
+                <ScalarProperty Name="EndownmentLetter" ColumnName="EndownmentLetter" />
+                <ScalarProperty Name="InternalRegulations" ColumnName="InternalRegulations" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="AdmissionTest" ColumnName="AdmissionTest" />
+                <ScalarProperty Name="KnowledgeTest" ColumnName="KnowledgeTest" />
+                <ScalarProperty Name="DisciplinaryBackground" ColumnName="DisciplinaryBackground" />
+                <ScalarProperty Name="PersonalReference" ColumnName="PersonalReference" />
+                <ScalarProperty Name="LaborCertification" ColumnName="LaborCertification" />
+                <ScalarProperty Name="MilitaryIdCopy" ColumnName="MilitaryIdCopy" />
+                <ScalarProperty Name="Photos" ColumnName="Photos" />
+                <ScalarProperty Name="DocumentCopy" ColumnName="DocumentCopy" />
+                <ScalarProperty Name="CV" ColumnName="CV" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="EpsId" ColumnName="EpsId" />
                 <ScalarProperty Name="AfpId" ColumnName="AfpId" />
@@ -1072,26 +1033,6 @@
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmployeeDocuments">
-            <EntityTypeMapping TypeName="AppLogisticsDBModel.EmployeeDocuments">
-              <MappingFragment StoreEntitySet="EmployeeDocuments">
-                <ScalarProperty Name="CriticalPosition" ColumnName="CriticalPosition" />
-                <ScalarProperty Name="EndownmentLetter" ColumnName="EndownmentLetter" />
-                <ScalarProperty Name="InternalRegulations" ColumnName="InternalRegulations" />
-                <ScalarProperty Name="Contract" ColumnName="Contract" />
-                <ScalarProperty Name="AdmissionTest" ColumnName="AdmissionTest" />
-                <ScalarProperty Name="KnowledgeTest" ColumnName="KnowledgeTest" />
-                <ScalarProperty Name="DisciplinaryBackground" ColumnName="DisciplinaryBackground" />
-                <ScalarProperty Name="PersonalReference" ColumnName="PersonalReference" />
-                <ScalarProperty Name="LaborCertification" ColumnName="LaborCertification" />
-                <ScalarProperty Name="MilitaryIdCopy" ColumnName="MilitaryIdCopy" />
-                <ScalarProperty Name="Photos" ColumnName="Photos" />
-                <ScalarProperty Name="DocumentCopy" ColumnName="DocumentCopy" />
-                <ScalarProperty Name="CV" ColumnName="CV" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -54,6 +54,45 @@
             @Html.DisplayNameFor(model => model.Comments)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.CV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DocumentCopy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MilitaryIdCopy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LaborCertification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonalReference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisciplinaryBackground)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KnowledgeTest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdmissionTest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contract)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InternalRegulations)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndownmentLetter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CriticalPosition)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.AFP.Name)
         </th>
         <th>
@@ -61,9 +100,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MaritalStatus.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeDocuments.EmployeeId)
         </th>
         <th></th>
     </tr>
@@ -113,6 +149,45 @@
             @Html.DisplayFor(modelItem => item.Comments)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.CV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DocumentCopy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Photos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MilitaryIdCopy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LaborCertification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonalReference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisciplinaryBackground)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KnowledgeTest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdmissionTest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contract)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InternalRegulations)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndownmentLetter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CriticalPosition)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.AFP.Name)
         </td>
         <td>
@@ -120,9 +195,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MaritalStatus.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeDocuments.EmployeeId)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

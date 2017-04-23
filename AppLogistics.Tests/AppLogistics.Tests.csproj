@@ -10,9 +10,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AppLogistics.Tests</RootNamespace>
     <AssemblyName>AppLogistics.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -92,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppLogistics\AppLogistics.csproj">
-      <Project>{3EC5F88E-5AFD-4A48-A5EF-160D1A51CC55}</Project>
+      <Project>{3ec5f88e-5afd-4a48-a5ef-160d1a51cc55}</Project>
       <Name>AppLogistics</Name>
     </ProjectReference>
   </ItemGroup>
