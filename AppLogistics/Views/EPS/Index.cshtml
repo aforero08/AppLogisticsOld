@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<AppLogisticsModel.EPS>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado EPSs";
 }
 
-<h2>Index EPSs</h2>
+<h2>@ViewBag.Title</h2>
 
-<table class="table table-striped table-hover table-condensed">
+<table class="table table-striped table-hover table-condensed table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -14,7 +14,7 @@
         <th>
             @Html.DisplayNameFor(model => model.NIT)
         </th>
-        <th></th>
+        <th>@Html.Label("Acciones")</th>
     </tr>
 
     @foreach (var item in Model)

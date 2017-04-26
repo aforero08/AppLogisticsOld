@@ -112,13 +112,13 @@ VALUES ([Name]);
 ----------------------------------------------
 MERGE INTO Employee AS Target
 USING (VALUES
-		(1, 85154527, 'Luis Gabriel', 'Melo Mendez', '1985-03-01', '2017-01-11', '2017-08-31', 'Bogotá', 'CALLE 14B NO. 119-17 FONTIBON', '3013419708', NULL, NULL, 'MAYLIS CANO', '3218857146', 1, 2, 2, NULL)
+		(1, 85154527, 'Luis Gabriel', 'Melo Mendez', '1985-03-01', '2017-01-11', '2017-08-31', 'Bogotá', 'CALLE 14B NO. 119-17 FONTIBON', '3013419708', NULL, NULL, 'MAYLIS CANO', '3218857146', 1, 2, 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, NULL)
 )
-AS Source ([Id],[DocumentNumber],[Name],[Surname],[BornDate],[HireDate],[RetirementDate],[City],[Address],[MobilePhone],[Phone],[Email],[EmergencyContact],[EmergencyContactPhone],[MaritalStatusId],[AfpId],[EpsId],[Comments])
+AS Source ([Id],[DocumentNumber],[Name],[Surname],[BornDate],[HireDate],[RetirementDate],[City],[Address],[MobilePhone],[Phone],[Email],[EmergencyContact],[EmergencyContactPhone],[MaritalStatusId],[AfpId],[EpsId],[CV],[DocumentCopy],[Photos],[MilitaryIdCopy],[LaborCertification],[PersonalReference],[DisciplinaryBackground],[KnowledgeTest],[AdmissionTest],[Contract],[InternalRegulations],[EndownmentLetter],[CriticalPosition],[Comments])
 ON Target.Id = Source.Id
 WHEN NOT MATCHED BY TARGET THEN
-INSERT ([DocumentNumber],[Name],[Surname],[BornDate],[HireDate],[RetirementDate],[City],[Address],[MobilePhone],[Phone],[Email],[EmergencyContact],[EmergencyContactPhone],[MaritalStatusId],[AfpId],[EpsId],[Comments])
-VALUES ([DocumentNumber],[Name],[Surname],[BornDate],[HireDate],[RetirementDate],[City],[Address],[MobilePhone],[Phone],[Email],[EmergencyContact],[EmergencyContactPhone],[MaritalStatusId],[AfpId],[EpsId],[Comments]);
+INSERT ([DocumentNumber],[Name],[Surname],[BornDate],[HireDate],[RetirementDate],[City],[Address],[MobilePhone],[Phone],[Email],[EmergencyContact],[EmergencyContactPhone],[MaritalStatusId],[AfpId],[EpsId],[CV],[DocumentCopy],[Photos],[MilitaryIdCopy],[LaborCertification],[PersonalReference],[DisciplinaryBackground],[KnowledgeTest],[AdmissionTest],[Contract],[InternalRegulations],[EndownmentLetter],[CriticalPosition],[Comments])
+VALUES ([DocumentNumber],[Name],[Surname],[BornDate],[HireDate],[RetirementDate],[City],[Address],[MobilePhone],[Phone],[Email],[EmergencyContact],[EmergencyContactPhone],[MaritalStatusId],[AfpId],[EpsId],[CV],[DocumentCopy],[Photos],[MilitaryIdCopy],[LaborCertification],[PersonalReference],[DisciplinaryBackground],[KnowledgeTest],[AdmissionTest],[Contract],[InternalRegulations],[EndownmentLetter],[CriticalPosition],[Comments]);
 
 
 ----------------------------------------------

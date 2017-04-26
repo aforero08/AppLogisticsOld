@@ -4,7 +4,7 @@
     ViewBag.Title = "Manage your external logins";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 @{
@@ -22,7 +22,7 @@
         if (Model.CurrentLogins.Count > 0)
         {
             <h4>Registered Logins</h4>
-            <table class="table">
+            <table class="table table-striped table-hover table-condensed table-responsive">
                 <tbody>
                     @foreach (var account in Model.CurrentLogins)
                     {

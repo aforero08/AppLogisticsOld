@@ -1,13 +1,13 @@
 ﻿@model AppLogisticsModel.MaritalStatus
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles Estado Civil";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title</h2>
 
 <div>
-    <h4>MaritalStatus</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -21,6 +21,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Volver al listado", "Index", null, new { @class = "btn btn-info" })
 </p>

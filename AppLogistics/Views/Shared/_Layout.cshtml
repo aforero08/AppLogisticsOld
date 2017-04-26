@@ -57,9 +57,10 @@
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
         </nav>
-
-        @RenderBody()
-
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+        </div>
         <footer class="footer">
             <br />
             <p>&copy; @DateTime.Now.Year -  APP Logistics</p>

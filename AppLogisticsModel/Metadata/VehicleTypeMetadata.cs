@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AppLogisticsModel
 {
     [MetadataType(typeof(VehicleTypeMetadata))]
-    public partial class Vehicle
+    public partial class VehicleType
     {
     }
 
