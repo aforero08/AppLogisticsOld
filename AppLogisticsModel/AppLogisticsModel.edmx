@@ -340,6 +340,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Rate_GetRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="clientId" Type="int" Mode="In" />
+          <Parameter Name="activityId" Type="int" Mode="In" />
+          <Parameter Name="vehicleTypeId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="AppLogisticsDBModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AFP" EntityType="Self.AFP" Schema="dbo" store:Type="Tables" />
@@ -529,6 +534,11 @@
             <End Role="Service" EntitySet="Service" />
             <End Role="Holding" EntitySet="Holding" />
           </AssociationSet>
+          <FunctionImport Name="Rate_GetRate" EntitySet="Rate" ReturnType="Collection(AppLogisticsDBModel.Rate)">
+            <Parameter Name="clientId" Mode="In" Type="Int32" />
+            <Parameter Name="activityId" Mode="In" Type="Int32" />
+            <Parameter Name="vehicleTypeId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Activity">
           <Key>
@@ -861,6 +871,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Rate_GetRate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int32" Name="ClientId" Nullable="false" />
+          <Property Type="Int32" Name="ActivityId" Nullable="false" />
+          <Property Type="Int32" Name="VehicleTypeId" Nullable="true" />
+          <Property Type="Int32" Name="Price" Nullable="false" />
+          <Property Type="Int32" Name="PercentCost" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1036,6 +1054,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Rate_GetRate" FunctionName="AppLogisticsDBModel.Store.Rate_GetRate">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

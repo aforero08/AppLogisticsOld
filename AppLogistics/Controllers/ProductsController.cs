@@ -47,7 +47,7 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] Product product)
+        public async Task<ActionResult> Create([Bind(Include = "Name")] Product product)
         {
             if (ModelState.IsValid)
             {

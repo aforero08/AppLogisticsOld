@@ -115,6 +115,9 @@
     <Compile Include="Rate.cs">
       <DependentUpon>AppLogisticsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Rate_GetRate_Result.cs">
+      <DependentUpon>AppLogisticsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Service.cs">
       <DependentUpon>AppLogisticsModel.tt</DependentUpon>
     </Compile>

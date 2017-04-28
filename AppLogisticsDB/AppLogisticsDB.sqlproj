@@ -61,6 +61,7 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables\" />
+    <Folder Include="Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment_InsertData.sql" />
@@ -85,6 +86,8 @@
     <Build Include="Tables\AspNetUserLogins.sql" />
     <Build Include="Tables\AspNetUserClaims.sql" />
     <Build Include="Tables\AspNetRoles.sql" />
+    <Build Include="Stored Procedures\Rate_GetRate.sql" />
+    <Build Include="Stored Procedures\Rate_GetPrice.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AppLogisticsDB.publish.xml" />

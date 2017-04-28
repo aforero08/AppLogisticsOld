@@ -51,7 +51,7 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,DocumentNumber,Name,Surname,BornDate,HireDate,RetirementDate,City,Address,MobilePhone,Phone,Email,EmergencyContact,EmergencyContactPhone,MaritalStatusId,AfpId,EpsId,Comments,CV,DocumentCopy,Photos,MilitaryIdCopy,LaborCertification,PersonalReference,DisciplinaryBackground,KnowledgeTest,AdmissionTest,Contract,InternalRegulations,EndownmentLetter,CriticalPosition")] Employee employee)
+        public async Task<ActionResult> Create([Bind(Include = "DocumentNumber,Name,Surname,BornDate,HireDate,RetirementDate,City,Address,MobilePhone,Phone,Email,EmergencyContact,EmergencyContactPhone,MaritalStatusId,AfpId,EpsId,Comments,CV,DocumentCopy,Photos,MilitaryIdCopy,LaborCertification,PersonalReference,DisciplinaryBackground,KnowledgeTest,AdmissionTest,Contract,InternalRegulations,EndownmentLetter,CriticalPosition")] Employee employee)
         {
             if (ModelState.IsValid)
             {

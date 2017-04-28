@@ -26,7 +26,17 @@ namespace AppLogistics
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/navbar.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
+
+            //Create bundle for jQueryUI  
+            // JavaScript
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                      "~/Scripts/jquery-ui-1.12.1.js"));
+            // CSS
+            bundles.Add(new StyleBundle("~/Content/cssjqryUi").Include(
+                        "~/Content/themes/base/jquery-ui.css"));
+
+
         }
     }
 }

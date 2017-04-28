@@ -12,6 +12,8 @@ namespace AppLogisticsModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class AppLogisticsDBEntities : DbContext
     {
@@ -39,5 +41,39 @@ namespace AppLogisticsModel
         public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<VehicleType> VehicleType { get; set; }
         public virtual DbSet<Holding> Holding { get; set; }
+    
+        public virtual ObjectResult<Rate> Rate_GetRate(Nullable<int> clientId, Nullable<int> activityId, Nullable<int> vehicleTypeId)
+        {
+            var clientIdParameter = clientId.HasValue ?
+                new ObjectParameter("clientId", clientId) :
+                new ObjectParameter("clientId", typeof(int));
+    
+            var activityIdParameter = activityId.HasValue ?
+                new ObjectParameter("activityId", activityId) :
+                new ObjectParameter("activityId", typeof(int));
+    
+            var vehicleTypeIdParameter = vehicleTypeId.HasValue ?
+                new ObjectParameter("vehicleTypeId", vehicleTypeId) :
+                new ObjectParameter("vehicleTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rate>("Rate_GetRate", clientIdParameter, activityIdParameter, vehicleTypeIdParameter);
+        }
+    
+        public virtual ObjectResult<Rate> Rate_GetRate(Nullable<int> clientId, Nullable<int> activityId, Nullable<int> vehicleTypeId, MergeOption mergeOption)
+        {
+            var clientIdParameter = clientId.HasValue ?
+                new ObjectParameter("clientId", clientId) :
+                new ObjectParameter("clientId", typeof(int));
+    
+            var activityIdParameter = activityId.HasValue ?
+                new ObjectParameter("activityId", activityId) :
+                new ObjectParameter("activityId", typeof(int));
+    
+            var vehicleTypeIdParameter = vehicleTypeId.HasValue ?
+                new ObjectParameter("vehicleTypeId", vehicleTypeId) :
+                new ObjectParameter("vehicleTypeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Rate>("Rate_GetRate", mergeOption, clientIdParameter, activityIdParameter, vehicleTypeIdParameter);
+        }
     }
 }

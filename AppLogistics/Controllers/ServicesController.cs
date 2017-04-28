@@ -43,6 +43,7 @@ namespace AppLogistics.Controllers
             ViewBag.ActivityId = new SelectList(db.Activity, "Id", "Name");
             ViewBag.CarrierId = new SelectList(db.Carrier, "Id", "Name");
             ViewBag.ClientId = new SelectList(db.Client, "Id", "Name");
+            ViewBag.ClientAreaId = new SelectList(db.ClientArea, "Id", "Name");
             ViewBag.ProductId = new SelectList(db.Product, "Id", "Name");
             ViewBag.VehicleTypeId = new SelectList(db.VehicleType, "Id", "Name");
             return View();
@@ -53,10 +54,25 @@ namespace AppLogistics.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,ExecutionDate,ClientId,ClientAreaId,ActivityId,ProductId,ProductQuantity,VehicleTypeId,VehicleNumber,CarrierId,ExternalId,Comments,CreationDate,FullPrice,HoldingPrice")] Service service)
+        public async Task<ActionResult> Create([Bind(Include = "ExecutionDate,ClientId,ClientAreaId,ActivityId,ProductId,ProductQuantity,VehicleTypeId,VehicleNumber,CarrierId,ExternalId,Comments")] Service service)
         {
             if (ModelState.IsValid)
             {
+                Rate r = db.Rate_GetRate(service.ClientId, service.ActivityId, service.VehicleTypeId).FirstOrDefault();
+
+                if (r != null)
+                {
+                    service.FullPrice = r.Price * service.ProductQuantity == null ? 0 : service.ProductQuantity.Value;
+                    service.HoldingPrice = r.Price * r.PercentCost / 100;
+                }
+                else
+                {
+                    // TODO: Log de errores
+                    throw new Exception("No existe un precio establecido para el servicio. Revise la definición de tarifas.");
+                }
+
+                service.CreationDate = DateTime.Now;
+
                 db.Service.Add(service);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
