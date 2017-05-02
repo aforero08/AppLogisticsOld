@@ -12,43 +12,25 @@
             @Html.DisplayNameFor(model => model.ExecutionDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ClientAreaId)
+            @Html.DisplayNameFor(model => model.Client)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductQuantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehicleNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExternalId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comments)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoldingPrice)
+            @Html.DisplayNameFor(model => model.VehicleType)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Activity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Carrier)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Client)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Product)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VehicleType)
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Carrier)
         </th>
         <th>@Html.Label("Acciones")</th>
     </tr>
@@ -59,43 +41,25 @@
             @Html.DisplayFor(modelItem => item.ExecutionDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ClientAreaId)
+            @Html.DisplayFor(modelItem => item.Client.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductQuantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExternalId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comments)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoldingPrice)
+            @Html.DisplayFor(modelItem => item.VehicleType.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Activity.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Carrier.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Client.Name)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Product.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.VehicleType.Name)
+            @Html.DisplayFor(modelItem => item.ProductQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Carrier.Name)
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" }) |

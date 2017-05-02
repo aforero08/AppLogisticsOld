@@ -129,5 +129,42 @@ namespace AppLogistics.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+    #region AJAX
+
+        /// <summary>
+        /// Permite obtener las áreas configuradas de un cliente a partir de su ID
+        /// </summary>
+        /// <param name="clientId">Id del cliente</param>
+        /// <returns>JSON con las áreas de un cliente</returns>
+        public JsonResult GetClientAreas(int clientId)
+        {
+            List<ClientArea> clientAreas = new List<ClientArea>();
+
+            var areas = db.ClientArea.Where(ca => ca.ClientId.Equals(clientId));
+            foreach (var area in areas)
+            {
+                ClientArea ca = new ClientArea(area.Id, area.Name);
+                clientAreas.Add(ca);
+            }
+
+            return Json(clientAreas, JsonRequestBehavior.AllowGet);
+        }
+
+        private class ClientArea
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+
+            public ClientArea(int id, string name)
+            {
+                Id = id;
+                Name = name;
+            }
+        }
+
+    #endregion
+
     }
 }

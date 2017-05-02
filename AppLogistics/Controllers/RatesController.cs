@@ -137,5 +137,87 @@ namespace AppLogistics.Controllers
             }
             base.Dispose(disposing);
         }
+
+        #region AJAX
+
+
+        /// <summary>
+        /// Permite obtener las actividades de un cliente configuradas en las tarifas
+        /// </summary>
+        /// <param name="clientId">Id del cliente</param>
+        /// <returns>JSON con las actividades de un cliente</returns>
+        public ActionResult GetClientActivities(int clientId)
+        {
+            List<ClientActivity> clientActivities = new List<ClientActivity>();
+
+            var activities =
+                from r in db.Rate
+                from a in db.Activity
+                where r.ClientId == clientId
+                    && r.ActivityId == a.Id
+                select a;
+
+            foreach (var activity in activities)
+            {
+                ClientActivity ca = new ClientActivity(activity.Id, activity.Name);
+                clientActivities.Add(ca);
+            }
+
+            return Json(clientActivities, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult GetClientActivityVehicles(int clientId, int activityId)
+        {
+            List<Vehicle> clientActivityVehicles = new List<Vehicle>();
+
+            var vehicles =
+                from r in db.Rate
+                from a in db.Activity
+                from v in db.VehicleType
+                where r.ClientId == clientId
+                    && r.ActivityId == activityId
+                    && r.VehicleTypeId == v.Id
+                select v;
+
+            foreach (var vehicle in vehicles)
+            {
+                Vehicle v = new Vehicle(vehicle.Id, vehicle.Name);
+                clientActivityVehicles.Add(v);
+            }
+
+            return Json(clientActivityVehicles, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+        private class ClientActivity
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+
+            public ClientActivity(int id, string name)
+            {
+                Id = id;
+                Name = name;
+            }
+        }
+
+        private class Vehicle
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+
+            public Vehicle(int id, string name)
+            {
+                Id = id;
+                Name = name;
+            }
+        }
+        #endregion
+
+
+
     }
 }

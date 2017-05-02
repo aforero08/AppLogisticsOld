@@ -40,10 +40,10 @@ namespace AppLogistics.Controllers
         // GET: Services/Create
         public ActionResult Create()
         {
-            ViewBag.ActivityId = new SelectList(db.Activity, "Id", "Name");
+            //ViewBag.ActivityId = new SelectList(db.Activity, "Id", "Name");
             ViewBag.CarrierId = new SelectList(db.Carrier, "Id", "Name");
             ViewBag.ClientId = new SelectList(db.Client, "Id", "Name");
-            ViewBag.ClientAreaId = new SelectList(db.ClientArea, "Id", "Name");
+            //ViewBag.ClientAreaId = new SelectList(db.ClientArea, "Id", "Name");
             ViewBag.ProductId = new SelectList(db.Product, "Id", "Name");
             ViewBag.VehicleTypeId = new SelectList(db.VehicleType, "Id", "Name");
             return View();
@@ -62,7 +62,7 @@ namespace AppLogistics.Controllers
 
                 if (r != null)
                 {
-                    service.FullPrice = r.Price * service.ProductQuantity == null ? 0 : service.ProductQuantity.Value;
+                    service.FullPrice = r.Price * (service.ProductQuantity == null ? 1 : service.ProductQuantity.Value);
                     service.HoldingPrice = r.Price * r.PercentCost / 100;
                 }
                 else
