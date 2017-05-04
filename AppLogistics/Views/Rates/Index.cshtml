@@ -9,39 +9,40 @@
 <table class="table table-striped table-hover table-condensed table-responsive">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Client)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleType)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PercentCost)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Activity.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Client.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehicleType.Name)
-        </th>
+        
         <th>@Html.Label("Acciones")</th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PercentCost)
+            @Html.DisplayFor(modelItem => item.Client.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Activity.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Client.Name)
+            @Html.DisplayFor(modelItem => item.VehicleType.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.VehicleType.Name)
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PercentCost) %
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-xs" }) |

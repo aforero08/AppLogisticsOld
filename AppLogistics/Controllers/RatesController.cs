@@ -157,7 +157,7 @@ namespace AppLogistics.Controllers
                     && r.ActivityId == a.Id
                 select a;
 
-            foreach (var activity in activities)
+            foreach (var activity in activities.Distinct())
             {
                 ClientActivity ca = new ClientActivity(activity.Id, activity.Name);
                 clientActivities.Add(ca);
@@ -180,7 +180,7 @@ namespace AppLogistics.Controllers
                     && r.VehicleTypeId == v.Id
                 select v;
 
-            foreach (var vehicle in vehicles)
+            foreach (var vehicle in vehicles.Distinct())
             {
                 Vehicle v = new Vehicle(vehicle.Id, vehicle.Name);
                 clientActivityVehicles.Add(v);

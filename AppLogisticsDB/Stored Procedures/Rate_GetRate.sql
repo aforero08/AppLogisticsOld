@@ -3,7 +3,7 @@
 -- Create date: 2017-04-27
 -- Description:	Permite conocer el precio de una tarifa a partir del cliente, actividad y vehículo
 -- =============================================
-CREATE PROCEDURE Rate_GetRate
+CREATE PROCEDURE [dbo].[Rate_GetRate]
 	-- Add the parameters for the stored procedure here
 	@clientId INT,
 	@activityId INT,
@@ -24,6 +24,6 @@ BEGIN
 	FROM	Rate
 	WHERE	ClientId = @clientId
 	AND		ActivityId = @activityId
-	AND		VehicleTypeId = @vehicleTypeId
+	AND		(VehicleTypeId IS NULL OR VehicleTypeId = @vehicleTypeId)
 
 END

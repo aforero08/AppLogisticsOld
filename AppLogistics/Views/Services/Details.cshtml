@@ -19,6 +19,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Name)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.ClientAreaId)
         </dt>
 
@@ -27,11 +35,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ProductQuantity)
+            @Html.DisplayNameFor(model => model.Activity)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductQuantity)
+            @Html.DisplayFor(model => model.Activity.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType.Name)
         </dd>
 
         <dt>
@@ -43,19 +59,27 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductQuantity)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.ExternalId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ExternalId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Comments)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Comments)
         </dd>
 
         <dt>
@@ -83,15 +107,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Activity.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Activity.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Carrier.Name)
+            @Html.DisplayNameFor(model => model.Carrier)
         </dt>
 
         <dd>
@@ -99,27 +115,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Client.Name)
+            @Html.DisplayNameFor(model => model.Comments)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Client.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VehicleType.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VehicleType.Name)
+            @Html.DisplayFor(model => model.Comments)
         </dd>
 
     </dl>

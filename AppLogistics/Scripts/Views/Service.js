@@ -12,6 +12,9 @@
 
 // Evento al seleccionar un cliente
 function ClientSelected() {
+
+    CleanCombos();
+
     UpdateClientAreas();
     UpdateActivities();
 }
@@ -45,8 +48,6 @@ function UpdateClientAreas() {
                         $('<option></option>').val(area.Id).html(area.Name));
                 });
             }
-
-            $("#ClientAreaId").focus();
         }
     });
 }
@@ -73,6 +74,7 @@ function UpdateActivities() {
                     $("#ActivityId").append(
                         $('<option></option>').val(activity.Id).html(activity.Name));
                 });
+                $("#ActivityId").change();
             }
         }
     });
@@ -83,27 +85,39 @@ function UpdateVehicleTypes() {
 
     // Obtener actividad y cliente seleccionados
     var selectedClientId = $('#ClientId').val();
-    var selecterActivityId = $('#ActivityId').val();
+    var selectedActivityId = $('#ActivityId').val();
 
     $.ajax({
         url: '/Rates/GetClientActivityVehicles',
         type: "GET",
         dataType: "JSON",
-        data: { ClientId: selectedClientId, ActivityId: selecterActivityId },
+        data: { ClientId: selectedClientId, ActivityId: selectedActivityId },
         success: function (vehicles) {
-            $("#VehicleId").html("");// Limpiar antes de agregar nuevos
+            $("#VehicleTypeId").html("");// Limpiar antes de agregar nuevos
 
             if (vehicles.length == 0) {
-                $("#VehicleId").append(
+                $("#VehicleTypeId").append(
                     $('<option></option>').val("").html("No hay tarifas con vehículos"));
             } else {
                 $.each(vehicles, function (i, vehicle) {
-                    $("#VehicleId").append(
+                    $("#VehicleTypeId").append(
                         $('<option></option>').val(vehicle.Id).html(vehicle.Name));
                 });
             }
         }
     });
+}
+
+
+function CleanCombos() {
+    $("#ClientAreaId").html(""); 
+    $("#ClientAreaId").append($('<option></option>').val("").html("No hay áreas para este cliente"));
+
+    $("#ActivityId").html(""); 
+    $("#ActivityId").append($('<option></option>').val("").html("No hay tarifas con actividades"));
+
+    $("#VehicleTypeId").html(""); 
+    $("#VehicleTypeId").append($('<option></option>').val("").html("No hay tarifas con vehículos"));
 }
 
 

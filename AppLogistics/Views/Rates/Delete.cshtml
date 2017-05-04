@@ -12,6 +12,30 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activity.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VehicleType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VehicleType.Name)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Price)
         </dt>
 
@@ -26,31 +50,6 @@
         <dd>
             @Html.DisplayFor(model => model.PercentCost)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Activity.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Activity.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Client.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Client.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VehicleType.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VehicleType.Name)
-        </dd>
-
     </dl>
 
     @using (Html.BeginForm()) {
