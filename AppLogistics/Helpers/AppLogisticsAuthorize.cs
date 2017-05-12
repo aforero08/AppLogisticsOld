@@ -109,7 +109,7 @@ namespace AppLogistics.Helpers
                         isAllowed = true;
                     break;
                 case "Employees":
-                    if (role.Contains("Administrador") || role.Contains("Supervisor"))
+                    if (role.Contains("Administrador") || role.Contains("Supervisor") || role.Contains("Operario"))
                         isAllowed = true;
                     break;
                 case "EPS":
