@@ -24,29 +24,32 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Inicio", "Index", "Home")</li>
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Employees" ? "active" : "")">@Html.ActionLink("Empleados", "Index", "Employees")</li>
-                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Services" ? "active" : "")">@Html.ActionLink("Servicios", "Index", "Services")</li>
-                        <li class="dropdown @("Clients, BranchOffices, ClientAreas, Rates, Activities, VehicleTypes, Products, Carriers, AFPs, EPS, MaritalStatus".Contains(ViewContext.RouteData.Values["Controller"].ToString()) ? "active" : "")">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-header">Empresas</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Clients" ? "active" : "")">@Html.ActionLink("Clientes", "Index", "Clients")</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "ClientAreas" ? "active" : "")">@Html.ActionLink("Áreas", "Index", "ClientAreas")</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "BranchOffices" ? "active" : "")">@Html.ActionLink("Sucursales", "Index", "BranchOffices")</li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Operación</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Rates" ? "active" : "")">@Html.ActionLink("Tarifas", "Index", "Rates")</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Activities" ? "active" : "")">@Html.ActionLink("Actividades", "Index", "Activities")</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "VehicleTypes" ? "active" : "")">@Html.ActionLink("Tipos de vehículo", "Index", "VehicleTypes")</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink("Productos", "Index", "Products")</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Carriers" ? "active" : "")">@Html.ActionLink("Transportadoras", "Index", "Carriers")</li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Parámetros de personal</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "AFPs" ? "active" : "")">@Html.ActionLink("AFPs", "Index", "AFPs")</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "EPS" ? "active" : "")">@Html.ActionLink("EPSs", "Index", "EPS")</li>
-                                <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "MaritalStatus" ? "active" : "")">@Html.ActionLink("Estados civiles", "Index", "MaritalStatus")</li>
-                            </ul>
-                        </li>
+                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                        {
+                            <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Employees" ? "active" : "")">@Html.ActionLink("Empleados", "Index", "Employees")</li>
+                            <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Services" ? "active" : "")">@Html.ActionLink("Servicios", "Index", "Services")</li>
+                            <li class="dropdown @("Clients, BranchOffices, ClientAreas, Rates, Activities, VehicleTypes, Products, Carriers, AFPs, EPS, MaritalStatus".Contains(ViewContext.RouteData.Values["Controller"].ToString()) ? "active" : "")">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Empresas</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Clients" ? "active" : "")">@Html.ActionLink("Clientes", "Index", "Clients")</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "ClientAreas" ? "active" : "")">@Html.ActionLink("Áreas", "Index", "ClientAreas")</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "BranchOffices" ? "active" : "")">@Html.ActionLink("Sucursales", "Index", "BranchOffices")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Operación</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Rates" ? "active" : "")">@Html.ActionLink("Tarifas", "Index", "Rates")</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Activities" ? "active" : "")">@Html.ActionLink("Actividades", "Index", "Activities")</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "VehicleTypes" ? "active" : "")">@Html.ActionLink("Tipos de vehículo", "Index", "VehicleTypes")</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Products" ? "active" : "")">@Html.ActionLink("Productos", "Index", "Products")</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Carriers" ? "active" : "")">@Html.ActionLink("Transportadoras", "Index", "Carriers")</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Parámetros de personal</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "AFPs" ? "active" : "")">@Html.ActionLink("AFPs", "Index", "AFPs")</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "EPS" ? "active" : "")">@Html.ActionLink("EPSs", "Index", "EPS")</li>
+                                    <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "MaritalStatus" ? "active" : "")">@Html.ActionLink("Estados civiles", "Index", "MaritalStatus")</li>
+                                </ul>
+                            </li>
+                        }
                         <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">@Html.ActionLink("Nosotros", "About", "Home")</li>
                         <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Home" && ViewContext.RouteData.Values["Action"].ToString() == "Contact" ? "active" : "")">@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     </ul>

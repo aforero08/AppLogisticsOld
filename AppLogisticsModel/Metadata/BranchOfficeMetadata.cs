@@ -21,7 +21,7 @@ namespace AppLogisticsModel
         /// </summary>
         [Required(AllowEmptyStrings = false)]
         [StringLength(128, MinimumLength = 3)]
-        [Display(Name = "Nombre")]
+        [Display(Name = "Nombre Sucursal")]
         public string Name;
     }
 }

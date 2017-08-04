@@ -19,7 +19,7 @@ namespace AppLogistics
             ConfigureRoles();
 
             // Crear y configurar administrador por defecto
-            CreateAdmin();
+            //CreateAdmin();
         }
 
         
