@@ -111,9 +111,17 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             AFP aFP = await db.AFP.FindAsync(id);
-            db.AFP.Remove(aFP);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                db.AFP.Remove(aFP);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar la AFP. Valide que no existan empleados con esta AFP asociada.");
+                return View(aFP);
+            }
         }
 
         protected override void Dispose(bool disposing)

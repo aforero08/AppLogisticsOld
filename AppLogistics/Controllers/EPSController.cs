@@ -111,9 +111,18 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             EPS ePS = await db.EPS.FindAsync(id);
-            db.EPS.Remove(ePS);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+
+            try
+            {
+                db.EPS.Remove(ePS);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar la EPS. Valide que no existan empleados con esta EPS asociada.");
+                return View(ePS);
+            }
         }
 
         protected override void Dispose(bool disposing)

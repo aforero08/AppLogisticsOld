@@ -111,9 +111,17 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             MaritalStatus maritalStatus = await db.MaritalStatus.FindAsync(id);
-            db.MaritalStatus.Remove(maritalStatus);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                db.MaritalStatus.Remove(maritalStatus);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar el Estado Civil. Valide que no existan empleados con este Estado Civil asociado.");
+                return View(maritalStatus);
+            }
         }
 
         protected override void Dispose(bool disposing)

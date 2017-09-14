@@ -25,16 +25,14 @@ namespace AppLogistics.Helpers
 
             try
             {
-                /*
+
                 // Obligar a que todos estén autenticados...
                 if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
                 {
                     filterContext.Result = new HttpUnauthorizedResult();
                     return;
                 }
-                else 
-                */
-                if (!AccessValidate(filterContext.HttpContext.User.Identity.Name, controllerFullName, actionName))
+                else if (!AccessValidate(filterContext.HttpContext.User.Identity.Name, controllerFullName, actionName))
                 {
                     var url = new UrlHelper(filterContext.RequestContext);
                     var accessDenied = url.Action("AccessDenied", "Home", null);
@@ -92,10 +90,12 @@ namespace AppLogistics.Helpers
                     if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;
                     break;
+                    /*
                 case "BranchOffices":
                     if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;
                     break;
+                    */
                 case "Carriers":
                     if (role.Contains("Administrador") || role.Contains("Supervisor"))
                         isAllowed = true;

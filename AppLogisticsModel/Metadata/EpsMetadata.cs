@@ -29,7 +29,7 @@ namespace AppLogisticsModel
         /// </summary>
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "NIT")]
-        [MinLength(9)]
+        [Range(100000000, 999999999)]
         public long NIT;
     }
 }

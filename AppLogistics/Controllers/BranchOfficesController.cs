@@ -111,9 +111,17 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             BranchOffice branchOffice = await db.BranchOffice.FindAsync(id);
-            db.BranchOffice.Remove(branchOffice);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                db.BranchOffice.Remove(branchOffice);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar la Sucursal. Valide que no existan clientes con esta Sucursal asociada.");
+                return View(branchOffice);
+            }
         }
 
         protected override void Dispose(bool disposing)
