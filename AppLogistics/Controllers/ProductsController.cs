@@ -111,9 +111,17 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Product product = await db.Product.FindAsync(id);
-            db.Product.Remove(product);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                db.Product.Remove(product);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar el Producto. Valide que no existan servicios con este Producto asociado.");
+                return View(product);
+            }
         }
 
         protected override void Dispose(bool disposing)

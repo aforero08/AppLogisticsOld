@@ -111,9 +111,17 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             VehicleType vehicleType = await db.VehicleType.FindAsync(id);
-            db.VehicleType.Remove(vehicleType);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                db.VehicleType.Remove(vehicleType);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar el Tipo de Vehículo. Valide que no existan Servicios o Tarifas con este Tipo de Vehículo asociado.");
+                return View(vehicleType);
+            }
         }
 
         protected override void Dispose(bool disposing)

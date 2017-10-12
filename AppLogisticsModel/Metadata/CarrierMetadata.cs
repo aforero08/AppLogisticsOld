@@ -29,7 +29,7 @@ namespace AppLogisticsModel
         /// </summary>
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "NIT")]
-        [MinLength(9)]
-        public long NIT;
+        [RegularExpression("^[0-9]{9}$", ErrorMessage = "El NIT debe conformarse por 9 dígitos")]
+        public string NIT;
     }
 }

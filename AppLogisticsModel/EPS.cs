@@ -21,7 +21,7 @@ namespace AppLogisticsModel
         }
     
         public string Name { get; set; }
-        public long NIT { get; set; }
+        public string NIT { get; set; }
         public int Id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

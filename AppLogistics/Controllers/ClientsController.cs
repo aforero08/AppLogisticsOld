@@ -116,9 +116,17 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Client client = await db.Client.FindAsync(id);
-            db.Client.Remove(client);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                db.Client.Remove(client);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar el cliente. Valide que no existan Servicios o Áreas de Cliente con este Cliente asociado.");
+                return View(client);
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -7,7 +7,7 @@
       <Diagram DiagramId="d38c34b015794f0ba2fbafe482960f68" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="AppLogisticsDBModel.AFP" Width="1.5" PointX="14.625" PointY="5.625" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.BranchOffice" Width="1.5" PointX="4.5" PointY="7" IsExpanded="false" />
-        <EntityTypeShape EntityType="AppLogisticsDBModel.EPS" Width="1.5" PointX="14.625" PointY="6.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="AppLogisticsDBModel.EPS" Width="1.5" PointX="14.625" PointY="6.875" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.MaritalStatus" Width="1.5" PointX="14.625" PointY="4.75" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.Activity" Width="1.5" PointX="5.5" PointY="4.25" IsExpanded="false" />
         <EntityTypeShape EntityType="AppLogisticsDBModel.Carrier" Width="1.5" PointX="8.5" PointY="3.625" IsExpanded="false" />

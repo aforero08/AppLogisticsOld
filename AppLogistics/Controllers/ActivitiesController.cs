@@ -111,9 +111,17 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Activity activity = await db.Activity.FindAsync(id);
-            db.Activity.Remove(activity);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                db.Activity.Remove(activity);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar la Actividad. Valide que no existan Servicios o Tarifas con esta Actividad asociada.");
+                return View(activity);
+            }
         }
 
         protected override void Dispose(bool disposing)

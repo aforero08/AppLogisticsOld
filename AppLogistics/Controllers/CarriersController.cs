@@ -111,9 +111,17 @@ namespace AppLogistics.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Carrier carrier = await db.Carrier.FindAsync(id);
-            db.Carrier.Remove(carrier);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                db.Carrier.Remove(carrier);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "No es posible borrar la Transportadora. Valide que no existan servicios con esta Transportadora asociada.");
+                return View(carrier);
+            }
         }
 
         protected override void Dispose(bool disposing)
